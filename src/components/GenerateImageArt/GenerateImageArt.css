@@ -5,7 +5,7 @@
 }
 
 .gen-ai-image{
-    height: 16em;
+    height: 17em;
     border-radius: 20px;
 }
 
@@ -21,6 +21,7 @@
     border-radius: 50px;
     z-index: 1000; /* Ensure it's above other content */
 }
+
 
 
 .search-bar-head {
@@ -81,3 +82,32 @@
         }
     }
 }
+
+.response-text-card {
+    border-radius: 10px;
+    box-shadow: 0px 2px 16px rgba(54, 127, 211, 0.18);
+    border: 1px solid #c8d9ee;
+    /* background-color: #fff; */
+  }
+
+  .scrollable-menu {
+    max-height: 300px; /* Adjust the max-height as needed */
+    overflow-y: auto;
+  }
+
+  .scrollable-menu::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollable-menu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .scrollable-menu::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+  
+  .scrollable-menu::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

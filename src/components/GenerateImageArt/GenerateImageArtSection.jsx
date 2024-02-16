@@ -1,7 +1,7 @@
 import React from "react";
 import "./GenerateImageArt.css";
 import {Link , useNavigate} from 'react-router-dom';
-import combactAi from '../Images/combatAI.png';
+import combactAi from '../Images/GenNewImage.jpg';
 
 const GenerateImageArtSection = () => {
   const navigate = useNavigate();

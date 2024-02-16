@@ -15,7 +15,7 @@ const SearchedSection = () => {
   const location = useLocation()
   const { data } = location.state || {};
 
-  const [color, setColor] = useState("#1c6373");
+  const [color, setColor] = useState("#696cff");
 
 
   const [isLoading, setIsLoading] = useState(true);

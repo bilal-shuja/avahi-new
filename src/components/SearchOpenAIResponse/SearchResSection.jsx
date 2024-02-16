@@ -54,10 +54,109 @@ const SearchResSection = ({ aiResponse, accordionData, isLoading }) => {
             ) : (
               <div className="container mt-5">
                 <h4 className="fw-bold ">
-                  {accordionData ? accordionData : "data"}
+                  {/* {accordionData ? accordionData : "data"} */}
                 </h4>
                 <div className="row">
                   <div className="col-lg-8">
+
+                  <h4 className="fw-normal  mt-5">
+                      <i
+                        className="fa-solid fa-align-left"
+                        style={{ color: "#696cff" }}
+                      />{" "}
+                      &nbsp; Answer...
+                    </h4>
+
+                    <div className="text-answer">
+                      <div className="card response-text-card">
+                        <div className="d-flex align-items-center card-body">
+                          <img
+                            src={NotePad}
+                            className="img-fluid"
+                            alt=""
+                            width={32}
+                          />
+                          &nbsp;&nbsp; &nbsp;&nbsp;
+                          <TypewriterEffect text={aiResponse.answer} />
+                        </div>
+                      </div>
+
+                   
+
+                      <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-grow-1 bd-highlight fw-bold">
+                          <a
+                            className="text-info"
+                            href="#r"
+                            style={{ textDecoration: "none"  }}
+                            onClick={() => alert("share-working")}
+                          >
+                            <i className="fa-solid fa-share text-primary" />
+                            &nbsp;
+                            <span className="text-black fw-normal ">Share</span>
+                          </a>
+                          &nbsp;&nbsp;
+                          <a
+                            className="text-info"
+                            href="#e"
+                            style={{ textDecoration: "none" }}
+                            onClick={() => alert("rewrite-working")}
+                          >
+                            <i className="fa-solid fa-rotate text-primary"  />
+                            &nbsp;
+                            <span className="text-black fw-normal">
+                              Rewrite
+                            </span>
+                          </a>
+                        </div>
+
+                        <div class="p-2 bd-highlight">
+                          <a
+                            className="text-info"
+                            href="#d"
+                            style={{ textDecoration: "none" }}
+                            onClick={() => alert("thumb btn-working")}
+                          >
+                            <i className="fa-solid fa-thumbs-down text-primary" />
+                          </a>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                          <a
+                            className="text-info"
+                            href="#c"
+                            style={{ textDecoration: "none" }}
+                            onClick={() => alert("align btn-working")}
+                          >
+                            <i className="fa-solid fa-align-right text-primary"/>
+                          </a>
+                        </div>
+
+                        <div class="p-2 bd-highlight">
+                          <a
+                            className="text-info"
+                            href="#f"
+                            style={{ textDecoration: "none" }}
+                            onClick={() => alert("clipboard btn-working")}
+                          >
+                            <i className="fa-solid fa-clipboard text-primary" />
+                          </a>
+                        </div>
+
+                        <div class="p-2 bd-highlight">
+                          <a
+                            className="text-info"
+                            href="#g"
+                            style={{ textDecoration: "none" }}
+                            onClick={() => alert("edit  btn-working")}
+                          >
+                            <i className="fa-solid fa-pen-to-square text-primary" />
+                          </a>
+                        </div>
+                      </div>
+                      <hr className="my-4" />
+                    </div>
+
+
                     <section id="response-resources-section">
                       <h4 className="fw-normal mt-4">
                         {" "}
@@ -107,138 +206,10 @@ const SearchResSection = ({ aiResponse, accordionData, isLoading }) => {
                     )}
                       </div>
 
-                      {/* </div> */}
                     </section>
 
-                    <h4 className="fw-normal  mt-5">
-                      <i
-                        className="fa-solid fa-align-left"
-                        style={{ color: "#696cff" }}
-                      />{" "}
-                      &nbsp; Answer...
-                    </h4>
+           
 
-                    <div className="text-answer">
-                      <div className="card response-text-card">
-                        <div className="d-flex align-items-center card-body">
-                          <img
-                            src={NotePad}
-                            className="img-fluid"
-                            alt=""
-                            width={32}
-                          />
-                          &nbsp;&nbsp; &nbsp;&nbsp;
-                          <TypewriterEffect text={aiResponse.answer} />
-                        </div>
-                      </div>
-
-                      {/* <div className="card-body"> */}
-                      {/* <p className="card-text"> */}
-
-                      {/* <ul className="mt-2">
-                          <li className="mt-2 mb-2">
-                            <span className="fw-bold">
-                              Personalized Learning:
-                            </span>
-                            &nbsp;&nbsp; Future versions of Chat GPT could
-                            enable students to engage in natural conversations
-                            with AI-powered virtual tutors, providing a more
-                            personalized learning experience
-                          </li>
-
-                          <li className="mt-2 mb-2">
-                            <span className="fw-bold">
-                              Improved Model Alignment:
-                            </span>
-                            &nbsp;&nbsp; GPT-4 has improved model alignment,
-                            allowing it to better follow user intentions and
-                            generate more accurate responses
-                          </li>
-                        </ul> */}
-
-                      {/* Overall, Chat GPT has significantly impacted the field
-                        of conversational AI and continues to evolve, offering
-                        exciting possibilities for the future */}
-                      {/* </p> */}
-
-                      {/* <div className="bar-chart mt-3 mb-3">
-                        <BarChart />
-                      </div> */}
-
-                      {/* </div> */}
-
-                      <div class="d-flex bd-highlight">
-                        <div class="p-2 flex-grow-1 bd-highlight fw-bold">
-                          <a
-                            className="text-info"
-                            href="#r"
-                            style={{ textDecoration: "none" }}
-                            onClick={() => alert("share-working")}
-                          >
-                            <i className="fa-solid fa-share " />
-                            &nbsp;
-                            <span className="text-black fw-normal">Share</span>
-                          </a>
-                          &nbsp;&nbsp;
-                          <a
-                            className="text-info"
-                            href="#e"
-                            style={{ textDecoration: "none" }}
-                            onClick={() => alert("rewrite-working")}
-                          >
-                            <i className="fa-solid fa-rotate text-info" />
-                            &nbsp;
-                            <span className="text-black fw-normal">
-                              Rewrite
-                            </span>
-                          </a>
-                        </div>
-
-                        <div class="p-2 bd-highlight">
-                          <a
-                            className="text-info"
-                            href="#d"
-                            style={{ textDecoration: "none" }}
-                            onClick={() => alert("thumb btn-working")}
-                          >
-                            <i className="fa-solid fa-thumbs-down" />
-                          </a>
-                        </div>
-                        <div class="p-2 bd-highlight">
-                          <a
-                            className="text-info"
-                            href="#c"
-                            style={{ textDecoration: "none" }}
-                            onClick={() => alert("align btn-working")}
-                          >
-                            <i class="fa-solid fa-align-right"></i>
-                          </a>
-                        </div>
-
-                        <div class="p-2 bd-highlight">
-                          <a
-                            className="text-info"
-                            href="#f"
-                            style={{ textDecoration: "none" }}
-                            onClick={() => alert("clipboard btn-working")}
-                          >
-                            <i className="fa-solid fa-clipboard" />
-                          </a>
-                        </div>
-
-                        <div class="p-2 bd-highlight">
-                          <a
-                            className="text-info"
-                            href="#g"
-                            style={{ textDecoration: "none" }}
-                            onClick={() => alert("edit  btn-working")}
-                          >
-                            <i className="fa-solid fa-pen-to-square" />
-                          </a>
-                        </div>
-                      </div>
-                      <hr className="my-4" />
-                    </div>
                     {/* onClick={() => setAccordionData('In how many sizes llama2 is available?')} */}
                     {/* <div className='d-flex justify-content-between align-content-center border-bottom border-5 pb-2 mt-2' style={{ cursor: "pointer" }} >
                         <h5>In how many sizes llama2 is available?</h5>
@@ -277,7 +248,7 @@ const SearchResSection = ({ aiResponse, accordionData, isLoading }) => {
                               aria-controls="flush-collapseOne"
                               style={{ fontSize: "15px", display: "flex", justifyContent: "space-between", alignItems: "center" }}
                             >
-                             In how many sizes llama2 is available?
+                             How have leisure travelers' habits changed in light of the overall economy according to the 2023 report, and what implications does this have for hoteliers?
 
                              <i className='fa-solid fa-plus'/>
                             </button>
@@ -298,7 +269,7 @@ const SearchResSection = ({ aiResponse, accordionData, isLoading }) => {
                               aria-controls="flush-collapseTwo"
                               style={{ fontSize: "15px", display: "flex", justifyContent: "space-between", alignItems: "center" }}
                             >
-                             What is model architecture of the Gemini?
+                            "Considering the shift in travel planning and booking behaviors observed in 2023, what are the key opportunities for hoteliers to attract and retain guests in a post-Covid travel landscape?
                              <i className='fa-solid fa-plus'/>
                             </button>
                           </h2>
@@ -318,7 +289,7 @@ const SearchResSection = ({ aiResponse, accordionData, isLoading }) => {
                               aria-controls="flush-collapseThree"
                               style={{ fontSize: "15px", display: "flex", justifyContent: "space-between", alignItems: "center" }}
                             >
-                            What is Training Hardware used & Carbon Footprint for training LLAMA2?
+                         What are the main characteristics of the American travel market, especially in relation to outbound tourism, and how does this compare to global trends?
                             <i className='fa-solid fa-plus'/>
                             </button>
                           </h2>
@@ -332,12 +303,11 @@ const SearchResSection = ({ aiResponse, accordionData, isLoading }) => {
                   </div>
 
                   <div className="col-lg-3 mx-auto">
-                    <div className="card-body">
+                    {/* <div className="card-body">
                       <img
                         className="img-fluid response-img-one w-100"
                         src={wolf}
                         alt=""
-                        // style={{ height: "15em" }}
                       />
                     </div>
 
@@ -361,12 +331,13 @@ const SearchResSection = ({ aiResponse, accordionData, isLoading }) => {
                           style={{ borderRadius: "20px" }}
                         />
                       </div>
-                    </div>
+                    </div> */}
 
                     {/* donut chart for the right info */}
-                    <div className="d-flex justify-content-center mt-5">
+
+                    {/* <div className="d-flex justify-content-center mt-5">
                       <DonutChart />
-                    </div>
+                    </div> */}
 
                     <section className="mt-4 mb-5">
                       <div
@@ -385,9 +356,9 @@ const SearchResSection = ({ aiResponse, accordionData, isLoading }) => {
                               data-bs-target="#flush-collapseOne"
                               aria-expanded="false"
                               aria-controls="flush-collapseOne"
-                              style={{ fontSize: "12px",display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                              style={{ fontSize: "10px",display: "flex", justifyContent: "space-between", alignItems: "center" }}
                             >
-                              What are the sum key features of chat gpt?
+                              "How has the role of technology and digital transformation influenced travel behaviors and expectations of tourists worldwide?
                               <i className='fa-solid fa-plus'/>
                             </button>
                           </h2>
@@ -405,9 +376,9 @@ const SearchResSection = ({ aiResponse, accordionData, isLoading }) => {
                               data-bs-target="#flush-collapseTwo"
                               aria-expanded="false"
                               aria-controls="flush-collapseTwo"
-                              style={{ fontSize: "12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                              style={{ fontSize: "10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}
                             >
-                              The benefits of using open AI ...
+                             What initial steps should international chemical scientists and their families take when planning to travel to the United States?
                               <i className='fa-solid fa-plus'/>
                             </button>
                           </h2>

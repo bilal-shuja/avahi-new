@@ -184,6 +184,7 @@ const SearchSection = () => {
                     <li
                       key={index}
                       onClick={() => handleSuggestionClick(suggestion)}
+                      style={{fontSize:"12px"}}
                     >
                       <a className="text-black">{suggestion}</a>
                     </li>
