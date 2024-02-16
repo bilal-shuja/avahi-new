@@ -1,0 +1,48 @@
+*{
+  padding: 0;
+  margin:0;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+html {
+  box-sizing: border-box;
+  overflow-y: hidden; 
+}
+
+.scroll-view , .scroll-view-component{
+  overflow-y: scroll;
+  /* scrollbar-width: thin; */
+  height: 90vh;
+
+}
+
+.scrollbar-secondary::-webkit-scrollbar-track , 
+.scrollbar-secondary-component::-webkit-scrollbar-track
+{
+    box-shadow: transparent;
+    border:none; 
+  }
+    
+  .scrollbar-secondary::-webkit-scrollbar,
+  .scrollbar-secondary-component::-webkit-scrollbar
+  {
+    width: 7px;
+}
+    
+.scrollbar-secondary::-webkit-scrollbar-thumb ,
+.scrollbar-secondary-component::-webkit-scrollbar-thumb
+{
+    border: none;
+    box-shadow:transparent;
+    background-color: #d0d2d6;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 767px) {
+  /* Hide horizontal scrollbar for the sidebar */
+  .scroll-view, .scrollbar-secondary {
+    overflow-x: hidden;
+  }
+}

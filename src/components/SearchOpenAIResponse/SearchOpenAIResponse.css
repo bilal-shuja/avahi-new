@@ -1,0 +1,134 @@
+.accordion-button:focus {
+  box-shadow: none;
+}
+.accordion-button::after {
+  display: none;
+}
+
+.search-bar-head {
+  background-color: #fcfcf9;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  border-radius: 50px;
+  width: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid #f3f3ee;
+
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    i {
+      font-size: 20px;
+      color: #64645f;
+    }
+    .form-control {
+      background-color: #fcfcf9;
+      border: none;
+      margin-bottom: 4px;
+      color: #000;
+    }
+    .form-control:focus {
+      box-shadow: none;
+    }
+    .form-check-input {
+      height: 25px;
+      width: 50px;
+      background-color: #fcfcf9;
+    }
+    .form-check-input:checked {
+      background-color: #17a2b8;
+    }
+    .form-check-input:focus {
+      box-shadow: none;
+    }
+    p {
+      color: #000;
+    }
+    .arrow-btn {
+      background: #eeeeea;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 35px;
+      border-radius: 25px;
+      border: none;
+    }
+  }
+}
+
+.sources-cards {
+  border-radius: 10px;
+  box-shadow: 0px 2px 16px rgba(54, 127, 211, 0.18);
+  border: 1px solid #c8d9ee;
+  background-color: #fff;
+
+  /* overflow-y: auto; */
+}
+
+.response-text-card {
+  border-radius: 10px;
+  box-shadow: 0px 2px 16px rgba(54, 127, 211, 0.18);
+  border: 1px solid #c8d9ee;
+  background-color: #fff;
+}
+.response-img-one {
+    border-radius: 20px;
+    box-shadow: -2px 8px 5px 0px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.response-img-one:hover{
+    cursor: pointer;
+    transform: scale(1.1); /* Scale down the image on hover */
+  }
+.response-img-two{
+    box-shadow: -2px 8px 5px 0px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+
+}
+.response-img-two:hover{
+    cursor: pointer;
+    transform: scale(1.1); /* Scale down the image on hover */
+  }
+
+.response-img-three{
+    box-shadow: -2px 8px 5px 0px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.response-img-three:hover{
+    cursor: pointer;
+    transform: scale(1.1); /* Scale down the image on hover */
+  }
+
+  @keyframes rotateUpDown {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-50%) rotate(10deg);
+    }
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+
+  .fa-wand-magic-sparkles{
+    animation: rotateUpDown 1.5s ease infinite;
+  }
+
+  .focus-btnn , .attach-btn , .pill-one , .pill-two , .pill-three{
+    box-shadow: 1px 8px 5px -1px rgba(0,0,0,0.1);
+
+  }
+.open-ai-sec {
+  margin-top: 100px;
+}
