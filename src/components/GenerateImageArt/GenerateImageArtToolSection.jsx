@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 // import Select from "react-select";
 import HashLoader from "react-spinners/HashLoader";
 import SampleImg from "../Images/sampleImg.jpg";
@@ -17,6 +17,8 @@ const GenerateImageArtToolSection = () => {
 
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#696cff");
+
+  const windowSize = useRef([window.innerWidth, window.innerHeight]);
 
   const options = [
     { value: "3d-model", label: "3d-model" },
@@ -38,6 +40,10 @@ const GenerateImageArtToolSection = () => {
     { value: "tile-texture", label: "tile-texture" },
   ];
 
+
+  const ImgStyling ={ 
+    height: windowSize.current[1] < 700 &&  windowSize.current[0] >700 ?"22em":windowSize.current[1] > 780 &&  windowSize.current[0] >700?"33em":windowSize.current[1] > 850  && windowSize.current[0] >700? "100em": "30em", 
+    borderRadius: "1em" }
 
   const [selectedOption, setSelectedOption] = useState('');
 
@@ -95,10 +101,32 @@ const GenerateImageArtToolSection = () => {
       <div className="scroll-view-component scrollbar-secondary-component">
         <div className="content-wrapper">
           <div className="container-xxl flex-grow-1">
+            
             <h4 className="fw-bold mb-4">
-              <span className="text-muted fw-light"></span> Gen Image
+              <span className="text-muted fw-light"></span> Gen Text To Image
             </h4>
+            {
+  windowSize.current[0] < 800&&
 
+                    <div className="art-style ms-3">
+                      <div className="btn-group dropup">
+                        <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {selectedOption ?  selectedOption :"Art Styles"}
+                        </button>
+                        <ul className="dropdown-menu scrollable-menu">
+                          {
+                            options.map((option)=>{
+                              return(
+
+                                <li key={option.value}><a className="dropdown-item"  defaultValue={selectedOption}   onClick={() => handleArtStyleOptions(option.value)}>{option.value}</a></li>
+                              )
+
+                            })
+                          }
+                        </ul>
+                      </div>
+                    </div>
+                  }
             <div className="container-fluid mb-5">
               <div className="d-flex justify-content-center">
                 <div className="mt-2 me-3">
@@ -121,9 +149,9 @@ const GenerateImageArtToolSection = () => {
                         src={`data:image/jpeg;base64,${
                           imageInput[imageInput.length - 1]
                         }`}
-                        className="img-fluid card-img-top"
+                        className="img-fluid card-img-top Image-Styling-custom"
                         alt="..."
-                        style={{ height: "30em", borderRadius: "1em" }}
+                        // style={{ height: "30em", borderRadius: "1em" }}
                       />
 
                       {showButtons && (
@@ -158,9 +186,9 @@ const GenerateImageArtToolSection = () => {
                   ) : (
                     <img
                       src={SampleImg}
-                      className="img-fluid card-img-top"
+                      className="img-fluid card-img-top Image-Styling-custom"
                       alt="..."
-                      style={{ height: "30em", borderRadius: "1em" }}
+                      // style={{ImgStyling}}
                     />
                   )}
                 </div>
@@ -179,21 +207,25 @@ const GenerateImageArtToolSection = () => {
               </div>
 
               <div className="search-bar-head mb-3 p-2">
+
+                
                 <div className="search-bar">
-                  <div>
+                  {/* <div>
                     <i className="fa-solid fa-circle-plus" />
-                  </div>
+                  </div> */}
                   <input
                     type="text"
                     className="form-control"
                     placeholder="Ask to follow-up..."
+                    value={imageTextInput}
                     onChange={(e) => setImageTextInput(e.target.value)}
                   />
 
                   {/* <p className="mt-2">{"Copilot"}</p> */}
 
                 {/* <div className="d-flex"> */}
-
+{
+  imageTextInput && loading === false   &&
                   <button
                     type="button"
                     className="ms-2 me-2 arrow-btn"
@@ -201,7 +233,10 @@ const GenerateImageArtToolSection = () => {
                   >
                     <i className="fa-solid fa-arrow-up" />
                   </button>
+                }
 
+{
+  windowSize.current[0] > 800&&
 
                     <div className="art-style ms-3">
                       <div className="btn-group dropup">
@@ -221,6 +256,7 @@ const GenerateImageArtToolSection = () => {
                         </ul>
                       </div>
                     </div>
+                  }
 
                   {/* </div> */}
 
@@ -229,7 +265,6 @@ const GenerateImageArtToolSection = () => {
              
 
               </div>
-
 
 
 

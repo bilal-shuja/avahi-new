@@ -9,6 +9,8 @@ function TabularView() {
 
   const [csvRowData, setCsvRowData] = useState([]);
   const [tableHeaders, setTableHeader] = useState([]);
+  const [loading, setLoading] = useState([]);
+
 
   const [questionInput, setQuestionInput] = useState("");
 
@@ -48,29 +50,33 @@ function TabularView() {
   ///////////GETTING CSV ANSWER ////////
 
   function get_Csv_Answer() {
+    setLoading(true)
+    console.log(questionInput,csv_Name)
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Content-Type", "application/json");
 
-    const raw = JSON.stringify({
-      question: questionInput,
-      csv_name: csv_Name, //it will be dynamic , param dalnma ha isme
-    });
+const raw = JSON.stringify({
+  "question": questionInput,
+  "csv_name": csv_Name
+});
 
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: raw,
+  redirect: "follow"
+};
 
-    fetch("https://avahi-genai.com/get_answer_tabular", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        // setCsvData(result)
-        setTabularAnswer(result)
-        console.log(result);
-      })
-      .catch((error) => console.error(error));
+fetch("https://avahi-genai.com/get_answer_tabular", requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    setLoading(false)
+    setTabularAnswer(result.answer.Answer)
+    console.log(result)})
+  .catch((error) => {
+    setLoading(false)
+    console.error(error)});
+  
   }
 
   function TableHeads({ item }) {
@@ -131,7 +137,7 @@ function TabularView() {
             <div className="row mb-3">
               <div className="col-sm-6">
                 <label htmlFor="" className="form-label fw-bold">
-                  Search
+                  Search Tabular AI
                 </label>
                 <input
                   type="text"
@@ -142,6 +148,20 @@ function TabularView() {
                 />
               </div>
 
+{
+  loading ===true?
+
+              <div className="col-lg-3" style={{ marginTop: "2em" }}>
+                <button
+                  className="btn btn-outline-primary btn-sm"
+                  // onClick={get_Csv_Answer}
+                >
+                  {" "}
+                  Loading...
+                </button>
+              </div>:
+              
+              questionInput &&
               <div className="col-lg-3" style={{ marginTop: "2em" }}>
                 <button
                   className="btn btn-outline-primary btn-sm"
@@ -151,11 +171,19 @@ function TabularView() {
                   Search
                 </button>
               </div>
-            </div>
+
+}
+
+</div>
 
           {
             tabularAnswer ?
+            
+            
             <div className="text-answer">
+               <label htmlFor="" className="form-label fw-bold">
+                  Answer
+                </label>
             <div className="card btn-sm response-text-card">
               <div className="d-flex align-items-center card-body">
                 <img
