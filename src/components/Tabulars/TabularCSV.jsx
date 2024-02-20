@@ -44,13 +44,13 @@ function TabularCSV() {
                 <p className="card-text">{item}</p>
 
 
-                <Link to="/TabularView" state={{value:item}}className="btn btn-primary text-white"> 
-              Generate &nbsp;&nbsp;
-              <i className="fa-solid fa-arrow-right"/>
-              </Link>
+                <Link to="/TabularView" state={{ value: item }} className="btn btn-primary text-white">
+                  Generate &nbsp;&nbsp;
+                  <i className="fa-solid fa-arrow-right" />
+                </Link>
               </div>
 
-           
+
             </div>
           </div>
         </>
@@ -79,19 +79,19 @@ function TabularCSV() {
 
 </div> */}
 
-                
-                <div className="row mb-5">
-                    <h2 className="text-center mb-5"> Choose any CSV &nbsp;&nbsp;
-                    <i className="fa-solid fa-file text-primary"/>
-                    </h2>
-            {csvData?.map((item) => {
-              return( 
+
+            <div className="row mb-5">
+              <h2 className="text-center mb-5"> Choose any CSV &nbsp;&nbsp;
+                <i className="fa-solid fa-file text-primary" />
+              </h2>
+              {csvData?.map((item) => {
+                return (
                   <CsvFolder item={item} />
 
-                  
-                  );
-                })}
-                </div>
+
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

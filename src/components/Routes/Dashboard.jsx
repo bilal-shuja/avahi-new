@@ -70,12 +70,12 @@ const Dashboard = () => {
                 />
 
 
-<Route
+                <Route
                   path="/TabularCSV"
                   element={<TabularCSV />}
                 />
 
-<Route
+                <Route
                   path="/TabularView"
                   element={<TabularView />}
                 />
