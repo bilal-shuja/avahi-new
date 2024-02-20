@@ -5,6 +5,7 @@ import Dashboard from "./components/Routes/Dashboard";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import TabularCSV from "./components/Tabulars/TabularCSV";
 
 const queryClient = new QueryClient();
 function App() {
@@ -35,7 +36,7 @@ function App() {
             </Routes>
           </Router>
         ) : (
-          <Dashboard />
+            <Dashboard />
         )}
       </div>
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />

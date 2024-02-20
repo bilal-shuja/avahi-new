@@ -21,7 +21,9 @@ import AIChatSection from "../AIChatSection/AIChatSection";
 import AISnapShotSection from "../AISnapShotSection/AISnapShotSection";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import IntroGui from "../Tabulars/Components/IntroGui";
 const Dashboard = () => {
+
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const toggleSidebar = () => {
@@ -70,9 +72,17 @@ const Dashboard = () => {
                 />
 
 
-                <Route
+                {/* <Route
                   path="/TabularCSV"
                   element={<TabularCSV />}
+                /> */}
+
+                <Route path="/TabularCSV" element={<TabularCSV />} />
+
+
+                <Route
+                  path="/TabularCsvIntro"
+                  element={<IntroGui />}
                 />
 
                 <Route
