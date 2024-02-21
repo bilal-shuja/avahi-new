@@ -70,7 +70,7 @@
   position : absolute ;
   height : 3px ;
   border-radius : 2px ;
-  background : #1b1919;
+  background : #697a8d;
   transition : all .5s ease ;
 }
 .button-tab-intro::before{
@@ -108,7 +108,7 @@
   height : 100% ;
   box-sizing : border-box ;
   border-radius : 300px ;
-  border : solid 3px #1b1919 ;
+  border : solid 3px #697a8d ;
 }
 .button__line:nth-child(1),
 .button__line:nth-child(1)::before{

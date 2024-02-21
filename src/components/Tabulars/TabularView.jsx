@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import Notepad from '../../components/Images/Notepad.png';
 import Table from '../../components/Images/table.gif'
 
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
+
 function TabularView() {
   const { state } = useLocation();
   const csv_Name = state?.value;
@@ -11,11 +14,13 @@ function TabularView() {
   const [tableHeaders, setTableHeader] = useState([]);
   const [loading, setLoading] = useState([]);
 
-
   const [questionInput, setQuestionInput] = useState("");
+  const [tabularAnswer, setTabularAnswer] = useState("");
 
-  const [tabularAnswer , setTabularAnswer] = useState("");
- 
+  const [chartData, setChartData] = useState(null)
+  const [chartType, setChartType] = useState("bar");
+
+
   useEffect(() => {
     get_CSV_data();
   }, []);
@@ -51,33 +56,43 @@ function TabularView() {
 
   function get_Csv_Answer() {
     setLoading(true)
-    console.log(questionInput,csv_Name)
     const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Content-Type", "application/json");
 
-const raw = JSON.stringify({
-  "question": questionInput,
-  "csv_name": csv_Name
-});
+    const raw = JSON.stringify({
+      "question": questionInput,
+      "csv_name": csv_Name
+    });
 
-const requestOptions = {
-  method: "POST",
-  headers: myHeaders,
-  body: raw,
-  redirect: "follow"
-};
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
 
-fetch("https://avahi-genai.com/get_answer_tabular", requestOptions)
-  .then((response) => response.json())
-  .then((result) => {
-    setLoading(false)
-    setTabularAnswer(result.answer.Answer)
-    console.log(result)})
-  .catch((error) => {
-    setLoading(false)
-    console.error(error)});
-  
+    fetch("https://avahi-genai.com/get_answer_tabular", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setLoading(false)
+        setTabularAnswer(result.answer.Answer)
+        setChartType(result?.answer?.data?.chart?.type)
+        setChartData(result?.answer?.data)
+        console.log(result)
+      })
+      .catch((error) => {
+        setLoading(false)
+        console.error(error)
+      });
   }
+
+  const options = {
+    chart: { type: chartType },
+    title: { text: chartData?.title?.text },
+    xAxis: { categories: chartData?.xAxis?.categories },
+    yAxis: { title: { text: chartData?.yAxis?.title?.text } },
+    series: chartData ? chartData.series : [],
+  };
 
   function TableHeads({ item }) {
     return <th className="text-white p-3">{item}</th>;
@@ -105,7 +120,6 @@ fetch("https://avahi-genai.com/get_answer_tabular", requestOptions)
     const [visibleText, setVisibleText] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
 
- 
     const words = text.split(" ");
 
     useEffect(() => {
@@ -137,7 +151,10 @@ fetch("https://avahi-genai.com/get_answer_tabular", requestOptions)
             <div className="row mb-3">
               <div className="col-sm-6">
                 <label htmlFor="" className="form-label fw-bold">
-                  Search Tabular AI
+                  {/* Search Tabular AI */}
+                  {
+                    csv_Name
+                  }
                 </label>
                 <input
                   type="text"
@@ -148,66 +165,74 @@ fetch("https://avahi-genai.com/get_answer_tabular", requestOptions)
                 />
               </div>
 
-{
-  loading ===true?
+              {
+                loading === true ?
 
-              <div className="col-lg-3" style={{ marginTop: "2em" }}>
-                <button
-                  className="btn btn-outline-primary btn-sm"
-                  // onClick={get_Csv_Answer}
-                >
-                  {" "}
-                  Loading...
-                </button>
-              </div>:
-              
-              questionInput &&
-              <div className="col-lg-3" style={{ marginTop: "2em" }}>
-                <button
-                  className="btn btn-outline-primary btn-sm"
-                  onClick={get_Csv_Answer}
-                >
-                  {" "}
-                  Search
-                </button>
-              </div>
+                  <div className="col-lg-3" style={{ marginTop: "2em" }}>
+                    <button
+                      className="btn btn-outline-primary btn-sm"
+                    // onClick={get_Csv_Answer}
+                    >
+                      {" "}
+                      Loading...
+                    </button>
+                  </div> :
 
-}
+                  questionInput &&
+                  <div className="col-lg-3" style={{ marginTop: "2em" }}>
+                    <button
+                      className="btn btn-outline-primary btn-sm"
+                      onClick={get_Csv_Answer}
+                    >
+                      {" "}
+                      Search
+                    </button>
+                  </div>
 
-</div>
+              }
 
-          {
-            tabularAnswer ?
-            
-            
-            <div className="text-answer">
-               <label htmlFor="" className="form-label fw-bold">
-                  Answer
-                </label>
-            <div className="card btn-sm response-text-card">
-              <div className="d-flex align-items-center card-body">
-                <img
-                  src={Notepad}
-                  className="img-fluid"
-                  alt=""
-                  width={32}
-                />
-                &nbsp;&nbsp; &nbsp;&nbsp;
-                <TypewriterEffect text={tabularAnswer} />
-              </div>
             </div>
-        
-            <hr className="my-4" />
-          </div>
-          :null
-          }
-            
-        
+
+            {
+              tabularAnswer ?
+
+
+                <div className="text-answer">
+                  <label htmlFor="" className="form-label fw-bold">
+                    Answer
+                  </label>
+                  <div className="card btn-sm response-text-card">
+                    <div className="d-flex align-items-center card-body">
+                      <img
+                        src={Notepad}
+                        className="img-fluid"
+                        alt=""
+                        width={32}
+                      />
+                      &nbsp;&nbsp; &nbsp;&nbsp;
+                      <TypewriterEffect text={tabularAnswer} />
+                    </div>
+                  </div>
+
+                  <div className="card mt-2 mb-2 response-text-card" style={{ borderRadius: "10px" }}>
+                    <div className="card-body">
+                      <HighchartsReact
+                        highcharts={Highcharts}
+                        options={options}
+                      />
+                    </div>
+                  </div>
+                  <hr className="my-4" />
+                </div>
+                : null
+            }
+
+
 
             <div className="card mb-5">
               <h5 className="card-header">
-               <span className="mt-2">CSV Tabular</span> &nbsp;&nbsp;
-              <img src={Table} alt="" width={25}/>
+                <span className="mt-2">CSV Tabular</span> &nbsp;&nbsp;
+                <img src={Table} alt="" width={25} />
               </h5>
               <div className="table-responsive text-nowrap csv-table">
                 <table className="table table-striped">

@@ -56,7 +56,7 @@ function TabularCSV() {
                     </div>
                     <div className="ag-courses-item_date-box">
                       <span className="ag-courses-item_date">
-                        Let's Dive into the world of tabular AI
+                        Click here to generate
                       </span>
                     </div>
                   </Link>
@@ -78,7 +78,7 @@ function TabularCSV() {
             </h4> */}
 
             <div className="row mb-5">
-              <h2 className="mb-3 mt-4"> Choose any CSV &nbsp;&nbsp;
+              <h2 className="mb-3 mt-4"> Select any CSV &nbsp;&nbsp;
                 <i className="fa-solid fa-file text-primary" />
               </h2>
               {csvData?.map((item) => {
