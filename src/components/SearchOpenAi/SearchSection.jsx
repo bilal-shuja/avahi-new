@@ -72,11 +72,6 @@ const SearchSection = () => {
       <div className="scroll-view-component scrollbar-secondary-component">
         <div className="content-wrapper">
           <div className="container-xxl flex-grow-1">
-            {/* <h4 className="fw-bold py-3 mb-4"><span className="text-muted fw-light">Forms/</span> Horizontal Layouts</h4> */}
-            {/* <div className="row">
-
-  </div> */}
-
             <div className="">
               <h1 className="main-heading">
                 Feel Free To Ask &nbsp;
@@ -144,12 +139,6 @@ const SearchSection = () => {
                       <i className="fas fa-bullseye" /> Focus
                     </button>
                     &nbsp;&nbsp;
-                    {/* <button
-                      type="button"
-                      className="btn btn-sm btn-light attach-btn ps-3 pe-3 p-2"
-                    >
-                      <i className="fas fa-plus" /> Attach
-                    </button> */}
                   </div>
 
                   <span class="badge rounded-pill bg-light p-2 text-dark pill-one">

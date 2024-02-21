@@ -5,7 +5,9 @@ import Table from '../../components/Images/table.gif'
 
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
+
+import suggestions from "./Components/Suggestions";
 
 function TabularView() {
   const { state } = useLocation();
@@ -20,7 +22,7 @@ function TabularView() {
 
   const [chartData, setChartData] = useState(null)
   const [chartType, setChartType] = useState("bar");
-
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
     get_CSV_data();
@@ -79,7 +81,6 @@ function TabularView() {
         setTabularAnswer(result.answer.Answer)
         setChartType(result?.answer?.data?.chart?.type)
         setChartData(result?.answer?.data)
-        console.log(result)
       })
       .catch((error) => {
         setLoading(false)
@@ -106,7 +107,6 @@ function TabularView() {
         {csvRowData.map((item, index) => {
           return (
             <tr key={index}>
-              {/* Map through the values of each object */}
               {Object.values(item).map((value, id) => (
                 <td key={id}>{value}</td>
               ))}
@@ -119,6 +119,7 @@ function TabularView() {
 
 
   const TypewriterEffect = ({ text }) => {
+
     const [visibleText, setVisibleText] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -133,13 +134,49 @@ function TabularView() {
 
         setVisibleText((prevText) => prevText + " " + words[currentIndex]);
         setCurrentIndex(currentIndex + 1);
-      }, 100); // Adjust the interval (in milliseconds) to control the speed of typing
+      }, 100);
 
       return () => clearInterval(intervalId);
     }, [words, currentIndex]);
 
     return <p className="card-text">{visibleText}</p>;
   };
+
+  const handleInputChange = (e) => {
+    setQuestionInput(e.target.value);
+    setShowSuggestions(e.target.value.length > 0);
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setQuestionInput(suggestion);
+    setShowSuggestions(false);
+  };
+
+  // const filteredSuggestions = csv_Name === "all_video_games(cleaned).csv" ? suggestions.all_video_games ? csv_Name === "AverageTimeSpendByAUserOnSocialMedia" : suggestions.average_time_social_media ?csv_Name === "Car Sales.csv" : suggestions.car_sales ? csv_Name === "mobile_price.csv" : suggestions.mobile_price ? csv_Name === "real_estate_texas_500_2024.csv" : suggestions.real_estate_texas ? csv_Name === "Youtuber.csv" : suggestions.youtuber : null
+  //   .filter((suggestion) =>
+  //     suggestion.toLowerCase().includes(questionInput.toLowerCase())
+  //   )
+  //   .slice(0, 4);
+
+  const filteredSuggestions = csv_Name === "all_video_games(cleaned).csv" ? 
+                            suggestions.all_video_games.filter(suggestion =>
+                              suggestion.toLowerCase().includes(questionInput.toLowerCase())).slice(0, 4) :
+                            csv_Name === "AverageTimeSpendByAUserOnSocialMedia" ? 
+                            suggestions.average_time_social_media.filter(suggestion =>
+                              suggestion.toLowerCase().includes(questionInput.toLowerCase())).slice(0, 4) :
+                            csv_Name === "Car Sales.csv" ? 
+                            suggestions.car_sales.filter(suggestion =>
+                              suggestion.toLowerCase().includes(questionInput.toLowerCase())).slice(0, 4) :
+                            csv_Name === "mobile_price.csv" ? 
+                            suggestions.mobile_price.filter(suggestion =>
+                              suggestion.toLowerCase().includes(questionInput.toLowerCase())).slice(0, 4) :
+                            csv_Name === "real_estate_texas_500_2024.csv" ? 
+                            suggestions.real_estate_texas.filter(suggestion =>
+                              suggestion.toLowerCase().includes(questionInput.toLowerCase())).slice(0, 4) :
+                            csv_Name === "Youtuber.csv" ? 
+                            suggestions.youtuber.filter(suggestion =>
+                              suggestion.toLowerCase().includes(questionInput.toLowerCase())).slice(0, 4) :
+                            null;
 
   return (
     <>
@@ -154,17 +191,29 @@ function TabularView() {
               <div className="col-sm-6">
                 <label htmlFor="" className="form-label fw-bold">
                   {/* Search Tabular AI */}
-                  {
-                    csv_Name
-                  }
+                  {csv_Name}
                 </label>
                 <input
                   type="text"
                   className="form-control border-primary form-control-sm"
                   id="basic-default-name"
                   placeholder="Search query..."
-                  onChange={(e) => setQuestionInput(e.target.value)}
+                  onChange={handleInputChange}
+                  value={questionInput}
                 />
+                {showSuggestions && (
+                  <ul className="suggestion-list w-75">
+                    {filteredSuggestions.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        onClick={() => handleSuggestionClick(suggestion)}
+                        style={{ fontSize: "12px" }}
+                      >
+                        <a className="text-black">{suggestion}</a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
               {
@@ -173,7 +222,6 @@ function TabularView() {
                   <div className="col-lg-3" style={{ marginTop: "2em" }}>
                     <button
                       className="btn btn-outline-primary btn-sm"
-                    // onClick={get_Csv_Answer}
                     >
                       {" "}
                       Loading...
@@ -217,7 +265,7 @@ function TabularView() {
                   </div>
                   {
 
-                    chartData === "" || chartData !== null ?
+                    chartData !== "" || chartData !== null ?
                       <>
                         <div className="card mt-2 mb-2 response-text-card" style={{ borderRadius: "10px" }}>
                           <div className="card-body">

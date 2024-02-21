@@ -35,35 +35,21 @@ function TabularCSV() {
 
     return (
       <>
-        <>
-          <div className="col-lg-12">
-            {/* <div className="card  shadow bg-transparent border border-primary mb-3 ">
-              <div className="card-body ">
-                <h5 className="card-title text-primary">Choose CSV's</h5>
-                <p className="card-text">{item}</p>
-                <Link to="/TabularView" state={{ value: item }} className="btn btn-primary text-white">
-                  Generate &nbsp;&nbsp;
-                  <i className="fa-solid fa-arrow-right" />
-                </Link>
+        <div className="col-lg-12">
+          <div className="ag-courses_item">
+            <Link to="/TabularView" state={{ value: item }} className="ag-courses-item_link">
+              <div className="ag-courses-item_bg" />
+              <div className="ag-courses-item_title">
+                {item}
               </div>
-            </div> */}
-
-                <div className="ag-courses_item">
-                  <Link to="/TabularView" state={{ value: item }} className="ag-courses-item_link">
-                    <div className="ag-courses-item_bg" />
-                    <div className="ag-courses-item_title">
-                      {item}
-                    </div>
-                    <div className="ag-courses-item_date-box">
-                      <span className="ag-courses-item_date">
-                        Click here to generate
-                      </span>
-                    </div>
-                  </Link>
-                </div>
+              <div className="ag-courses-item_date-box">
+                <span className="ag-courses-item_date">
+                  Click here to generate
+                </span>
               </div>
-            
-        </>
+            </Link>
+          </div>
+        </div>
       </>
     );
   }
