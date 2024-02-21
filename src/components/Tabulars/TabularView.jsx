@@ -5,6 +5,7 @@ import Table from '../../components/Images/table.gif'
 
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import {toast} from 'react-toastify'
 
 function TabularView() {
   const { state } = useLocation();
@@ -83,6 +84,7 @@ function TabularView() {
       .catch((error) => {
         setLoading(false)
         console.error(error)
+        toast.warn("Something went wrong!")
       });
   }
 
@@ -213,15 +215,20 @@ function TabularView() {
                       <TypewriterEffect text={tabularAnswer} />
                     </div>
                   </div>
+                  {
 
-                  <div className="card mt-2 mb-2 response-text-card" style={{ borderRadius: "10px" }}>
-                    <div className="card-body">
-                      <HighchartsReact
-                        highcharts={Highcharts}
-                        options={options}
-                      />
-                    </div>
-                  </div>
+                    chartData === "" || chartData !== null ?
+                      <>
+                        <div className="card mt-2 mb-2 response-text-card" style={{ borderRadius: "10px" }}>
+                          <div className="card-body">
+                            <HighchartsReact
+                              highcharts={Highcharts}
+                              options={options}
+                            />
+                          </div>
+                        </div>
+                      </> : null
+                  }
                   <hr className="my-4" />
                 </div>
                 : null
