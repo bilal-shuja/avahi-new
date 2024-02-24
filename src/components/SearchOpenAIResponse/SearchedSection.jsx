@@ -35,7 +35,7 @@ const getData = async () => {
       session_id: "3abc"
   }
 
-  await axios.post('https://avahi-genai.com/get_answer', answerObj)
+  await axios.post('https://text.avahi-genai.com/get_answer', answerObj)
       .then((res) => {
           setIsLoading(false);
 

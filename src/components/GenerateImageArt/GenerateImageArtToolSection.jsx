@@ -1,4 +1,4 @@
-import { useState,useRef } from "react";
+import { useState, useRef } from "react";
 // import Select from "react-select";
 import HashLoader from "react-spinners/HashLoader";
 import SampleImg from "../Images/sampleImg.jpg";
@@ -41,13 +41,14 @@ const GenerateImageArtToolSection = () => {
   ];
 
 
-  const ImgStyling ={ 
-    height: windowSize.current[1] < 700 &&  windowSize.current[0] >700 ?"22em":windowSize.current[1] > 780 &&  windowSize.current[0] >700?"33em":windowSize.current[1] > 850  && windowSize.current[0] >700? "100em": "30em", 
-    borderRadius: "1em" }
+  const ImgStyling = {
+    height: windowSize.current[1] < 700 && windowSize.current[0] > 700 ? "22em" : windowSize.current[1] > 780 && windowSize.current[0] > 700 ? "33em" : windowSize.current[1] > 850 && windowSize.current[0] > 700 ? "100em" : "30em",
+    borderRadius: "1em"
+  }
 
   const [selectedOption, setSelectedOption] = useState('');
 
-  const handleArtStyleOptions = (optionValue)=>{
+  const handleArtStyleOptions = (optionValue) => {
     setSelectedOption(optionValue)
   }
 
@@ -101,36 +102,36 @@ const GenerateImageArtToolSection = () => {
       <div className="scroll-view-component scrollbar-secondary-component">
         <div className="content-wrapper">
           <div className="container-xxl flex-grow-1">
-            
-            <h4 className="fw-bold mb-4">
+
+            <h4 className="fw-bold mb-4 mt-3">
               <span className="text-muted fw-light"></span> Gen Text To Image
             </h4>
             {
-  windowSize.current[0] < 800&&
+              windowSize.current[0] < 800 &&
 
-                    <div className="art-style ms-3">
-                      <div className="btn-group dropup">
-                        <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          {selectedOption ?  selectedOption :"Art Styles"}
-                        </button>
-                        <ul className="dropdown-menu scrollable-menu">
-                          {
-                            options.map((option)=>{
-                              return(
+              <div className="art-style ms-3">
+                <div className="btn-group dropup">
+                  <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {selectedOption ? selectedOption : "Art Styles"}
+                  </button>
+                  <ul className="dropdown-menu scrollable-menu">
+                    {
+                      options.map((option) => {
+                        return (
 
-                                <li key={option.value}><a className="dropdown-item"  defaultValue={selectedOption}   onClick={() => handleArtStyleOptions(option.value)}>{option.value}</a></li>
-                              )
+                          <li key={option.value}><a className="dropdown-item" defaultValue={selectedOption} onClick={() => handleArtStyleOptions(option.value)}>{option.value}</a></li>
+                        )
 
-                            })
-                          }
-                        </ul>
-                      </div>
-                    </div>
-                  }
-            <div className="container-fluid mb-5">
-              <div className="d-flex justify-content-center">
-                <div className="mt-2 me-3">
-                  {loading === true ? (
+                      })
+                    }
+                  </ul>
+                </div>
+              </div>
+            }
+            <div className="mb-5 mt-2">
+              <div className="centered-div">
+                {loading === true ? (
+                  <div style={{ position: "absolute", bottom: 0, left: 110 }}>
                     <HashLoader
                       color={color}
                       loading={loading}
@@ -139,80 +140,76 @@ const GenerateImageArtToolSection = () => {
                       aria-label="Loading Spinner"
                       data-testid="loader"
                     />
-                  ) : imageInput && imageInput.length > 0 ? (
-                    <div
-                      className="card mb-5"
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      <img
-                        src={`data:image/jpeg;base64,${
-                          imageInput[imageInput.length - 1]
+                  </div>
+                ) : imageInput && imageInput.length > 0 ? (
+                  <div
+                    className="card mb-5" style={{ width: "400px" }}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <img
+                      src={`data:image/jpeg;base64,${imageInput[imageInput.length - 1]
                         }`}
-                        className="img-fluid card-img-top Image-Styling-custom"
-                        alt="..."
-                        // style={{ height: "30em", borderRadius: "1em" }}
-                      />
+                      className="img-fluid card-img-top Image-Styling-custom"
+                      alt="generated image"
+                    />
 
-                      {showButtons && (
-                        <div
-                          className="overlay-buttons"
-                          style={{
-                            position: "absolute",
-                            top: 0,
-                            right: 0,
-                            padding: "20px",
-                            display: "flex",
-                            flexDirection: "column",
-                          }}
+                    {showButtons && (
+                      <div
+                        className="overlay-buttons"
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
+                          padding: "20px",
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <button
+                          className="btn btn-sm btn-outline-danger mb-2"
+                          onClick={() => handleDelete(imageInput.length - 1)}
                         >
-                          <button
-                            className="btn btn-sm btn-outline-danger mb-2"
-                            onClick={() => handleDelete(imageInput.length - 1)}
-                          >
-                            <i className="fa-solid fa-trash" />
-                          </button>
-                          <button
-                            className="btn btn-sm btn-outline-info"
-                            onClick={() =>
-                              handleDownload(imageInput.length - 1)
-                            }
-                          >
-                            <i className="fa-solid fa-download" />
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  ) : (
+                          <i className="fa-solid fa-trash" />
+                        </button>
+                        <button
+                          className="btn btn-sm btn-outline-info"
+                          onClick={() =>
+                            handleDownload(imageInput.length - 1)
+                          }
+                        >
+                          <i className="fa-solid fa-download" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                ) : (
+                  <div className="">
                     <img
                       src={SampleImg}
                       className="img-fluid card-img-top Image-Styling-custom"
                       alt="..."
-                      // style={{ImgStyling}}
+                      style={{ width: "400px" }}
                     />
-                  )}
-                </div>
-                &nbsp;&nbsp;
-                {loading === true ? null : (
-                  <div className="mt-1">
-                    {/* <Select
+                  </div>
+
+                )}
+              </div>
+              &nbsp;&nbsp;
+              {loading === true ? null : (
+                <div className="mt-1">
+                  {/* <Select
                 defaultValue={selectedOption}
                 onChange={setSelectedOption}
                 options={options}
               /> */}
 
 
-                  </div>
-                )}
-              </div>
-
+                </div>
+              )}
               <div className="search-bar-head mb-3 p-2">
-
-                
                 <div className="search-bar">
-                  {/* <div>
-                    <i className="fa-solid fa-circle-plus" />
-                  </div> */}
                   <input
                     type="text"
                     className="form-control"
@@ -220,35 +217,31 @@ const GenerateImageArtToolSection = () => {
                     value={imageTextInput}
                     onChange={(e) => setImageTextInput(e.target.value)}
                   />
+                  {
+                    imageTextInput && loading === false &&
+                    <button
+                      type="button"
+                      className="ms-2 me-2 arrow-btn"
+                      onClick={generateImage}
+                    >
+                      <i className="fa-solid fa-arrow-up" />
+                    </button>
+                  }
 
-                  {/* <p className="mt-2">{"Copilot"}</p> */}
-
-                {/* <div className="d-flex"> */}
-{
-  imageTextInput && loading === false   &&
-                  <button
-                    type="button"
-                    className="ms-2 me-2 arrow-btn"
-                    onClick={generateImage}
-                  >
-                    <i className="fa-solid fa-arrow-up" />
-                  </button>
-                }
-
-{
-  windowSize.current[0] > 800&&
+                  {
+                    windowSize.current[0] > 800 &&
 
                     <div className="art-style ms-3">
                       <div className="btn-group dropup">
                         <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          {selectedOption ?  selectedOption :"Art Styles"}
+                          {selectedOption ? selectedOption : "Art Styles"}
                         </button>
                         <ul className="dropdown-menu scrollable-menu">
                           {
-                            options.map((option)=>{
-                              return(
+                            options.map((option) => {
+                              return (
 
-                                <li key={option.value}><a className="dropdown-item"  defaultValue={selectedOption}   onClick={() => handleArtStyleOptions(option.value)}>{option.value}</a></li>
+                                <li key={option.value}><a className="dropdown-item" defaultValue={selectedOption} onClick={() => handleArtStyleOptions(option.value)}>{option.value}</a></li>
                               )
 
                             })
@@ -257,17 +250,8 @@ const GenerateImageArtToolSection = () => {
                       </div>
                     </div>
                   }
-
-                  {/* </div> */}
-
                 </div>
-
-             
-
               </div>
-
-
-
             </div>
           </div>
         </div>
