@@ -3,13 +3,8 @@ import { useState, useRef } from "react";
 import HashLoader from "react-spinners/HashLoader";
 import SampleImg from "../Images/sampleImg.jpg";
 import ErrorPage from "../ErrorPages/ErrorPage";
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
-const override = {
-  display: "block",
-  margin: "0 auto",
-  marginTop: "10em",
-  marginLeft: "-9em",
-};
 const GenerateImageArtToolSection = () => {
 
   const [showButtons, setShowButtons] = useState(false);
@@ -91,12 +86,32 @@ const GenerateImageArtToolSection = () => {
         console.log("this is response,", result)
         setImageInput((prevImages) => [...prevImages, result.base_64_img_str]);
         setLoading(false);
+        setShowErrorPage(false)
       })
       .catch((error) => {
         console.error("this is error", error);
         setShowErrorPage(true)
       });
   }
+
+  const minuteSeconds = 60;
+
+  const timerProps = {
+    isPlaying: true,
+    size: 120,
+    strokeWidth: 6
+  };
+
+  const renderTime = (dimension, time) => {
+    return (
+      <div className="time-wrapper">
+        <div className="time">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{time}</div>
+        <div>{dimension}</div>
+      </div>
+    );
+  };
+
+  const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
 
   return (
     <div>
@@ -134,16 +149,26 @@ const GenerateImageArtToolSection = () => {
                 <div className="mb-5 mt-2">
                   <div className="centered-div">
                     {loading === true ? (
-                      <div style={{ position: "absolute", bottom: 0, left: 110 }}>
-                        <HashLoader
-                          color={color}
-                          loading={loading}
-                          cssOverride={override}
-                          size={50}
-                          aria-label="Loading Spinner"
-                          data-testid="loader"
-                        />
-                      </div>
+                      <>
+                      <div className="d-flex justify-content-center">
+                        <CountdownCircleTimer
+                          {...timerProps}
+                          colors="#a5a6ff"
+                          duration={minuteSeconds}
+                          initialRemainingTime={minuteSeconds}
+                          onComplete={() => {
+                            setShowErrorPage(true)
+                          }}
+                        >
+                          {({ elapsedTime, color }) => (
+                            <span style={{ color }}>
+                              {renderTime("seconds", getTimeSeconds(elapsedTime))}
+                            </span>
+                          )}
+                        </CountdownCircleTimer>
+                        </div>
+                        <p className="mt-2">This takes upto a minute</p>
+                      </>
                     ) : imageInput && imageInput.length > 0 ? (
                       <div
                         className="card mb-5" style={{ width: "400px" }}
@@ -246,7 +271,6 @@ const GenerateImageArtToolSection = () => {
 
                                     <li key={option.value}><a className="dropdown-item" defaultValue={selectedOption} onClick={() => handleArtStyleOptions(option.value)}>{option.value}</a></li>
                                   )
-
                                 })
                               }
                             </ul>

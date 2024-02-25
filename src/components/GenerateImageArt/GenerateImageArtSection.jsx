@@ -1,5 +1,5 @@
 import React from "react";
-import "./GenerateImageArt.css";
+import "./GenerateImageArt.scss";
 import { Link, useNavigate } from 'react-router-dom';
 import combactAi from '../Images/GenNewImage.jpg';
 
