@@ -14,6 +14,7 @@ const GenerateImageArtToolSection = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [color, setColor] = useState("#696cff");
   const [showErrorPage, setShowErrorPage] = useState(false)
+  const [errorTxt,setErrorTxt]=useState("It usually takes upto 1 minute")
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
 
   const options = [
@@ -71,6 +72,7 @@ const GenerateImageArtToolSection = () => {
   };
 
   function generateImage() {
+    setErrorTxt("It usually takes upto 1 minute")
     setLoading(true);
     const requestOptions = {
       method: "GET",
@@ -84,13 +86,27 @@ const GenerateImageArtToolSection = () => {
       .then((response) => response.json())
       .then((result) => {
         console.log("this is response,", result)
-        setImageInput((prevImages) => [...prevImages, result.base_64_img_str]);
-        setLoading(false);
-        setShowErrorPage(false)
+        console.log("yay i got run")
+        if(result){
+          setLoading(false);
+
+          if(result.base_64_img_str){
+            setShowErrorPage(false)
+            setImageInput((prevImages) => [...prevImages, result.base_64_img_str]);
+          }
+          else{
+            setShowErrorPage(true)
+
+          }
+        }
+    
+
       })
       .catch((error) => {
         console.error("this is error", error);
         setShowErrorPage(true)
+        setLoading(false);
+
       });
   }
 
@@ -122,7 +138,7 @@ const GenerateImageArtToolSection = () => {
               <div className="container-xxl flex-grow-1">
 
                 <h4 className="fw-bold mb-4 mt-3">
-                  <span className="text-muted fw-light"></span> Gen Text To Image
+                  <span className="text-muted fw-light"></span> Turn Imaginations Into Reality
                 </h4>
                 {
                   windowSize.current[0] < 800 &&
@@ -157,7 +173,8 @@ const GenerateImageArtToolSection = () => {
                           duration={minuteSeconds}
                           initialRemainingTime={minuteSeconds}
                           onComplete={() => {
-                            setShowErrorPage(true)
+                            // setShowErrorPage(true)
+                          setErrorTxt("Its taking more than expected please wait..")
                           }}
                         >
                           {({ elapsedTime, color }) => (
@@ -167,7 +184,7 @@ const GenerateImageArtToolSection = () => {
                           )}
                         </CountdownCircleTimer>
                         </div>
-                        <p className="mt-2">This takes upto a minute</p>
+                        <p className="mt-2">{errorTxt}</p>
                       </>
                     ) : imageInput && imageInput.length > 0 ? (
                       <div
@@ -241,7 +258,7 @@ const GenerateImageArtToolSection = () => {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ask to follow-up..."
+                        placeholder="Add prompt here"
                         value={imageTextInput}
                         onChange={(e) => setImageTextInput(e.target.value)}
                       />
