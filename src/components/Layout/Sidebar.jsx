@@ -71,6 +71,13 @@ const Sidebar = ({ isVisible, toggleSidebar }) => {
                   </Link>
                 </li>
 
+                <li className="menu-item mt-2">
+                  <Link to="/AIChat" className="menu-link">
+                    <i className="menu-icon tf-icons fa-solid fa-headphones" />
+                    <div data-i18n="AI Chat">AI ChatBot</div>
+                  </Link>
+                </li>
+
 
                 <li className="menu-header small text-uppercase" ><span className="menu-header-text">Up Comings</span></li>
 
@@ -84,12 +91,7 @@ const Sidebar = ({ isVisible, toggleSidebar }) => {
                 </li>
 
 
-                <li className="menu-item mt-2">
-                  <Link to="/AIChat" className="menu-link">
-                    <i className="menu-icon tf-icons fa-solid fa-headphones" />
-                    <div data-i18n="AI Chat">AI Chat</div>
-                  </Link>
-                </li>
+                
 
                 <li className="menu-item mt-2">
                   <Link to="/AISnapShotSection" className="menu-link">
