@@ -1,6 +1,4 @@
 import { useState, useRef } from "react";
-// import Select from "react-select";
-import HashLoader from "react-spinners/HashLoader";
 import SampleImg from "../Images/sampleImg.jpg";
 import ErrorPage from "../ErrorPages/ErrorPage";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
@@ -12,7 +10,6 @@ const GenerateImageArtToolSection = () => {
   const [imageTextInput, setImageTextInput] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
-  const [color, setColor] = useState("#696cff");
   const [showErrorPage, setShowErrorPage] = useState(false)
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
 
@@ -83,7 +80,6 @@ const GenerateImageArtToolSection = () => {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log("this is response,", result)
         setImageInput((prevImages) => [...prevImages, result.base_64_img_str]);
         setLoading(false);
         setShowErrorPage(false)
@@ -94,14 +90,13 @@ const GenerateImageArtToolSection = () => {
       });
   }
 
+  // /for countdown timer
   const minuteSeconds = 60;
-
   const timerProps = {
     isPlaying: true,
     size: 120,
     strokeWidth: 6
   };
-
   const renderTime = (dimension, time) => {
     return (
       <div className="time-wrapper">
@@ -110,7 +105,6 @@ const GenerateImageArtToolSection = () => {
       </div>
     );
   };
-
   const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
 
   return (
@@ -150,22 +144,22 @@ const GenerateImageArtToolSection = () => {
                   <div className="centered-div">
                     {loading === true ? (
                       <>
-                      <div className="d-flex justify-content-center">
-                        <CountdownCircleTimer
-                          {...timerProps}
-                          colors="#a5a6ff"
-                          duration={minuteSeconds}
-                          initialRemainingTime={minuteSeconds}
-                          onComplete={() => {
-                            setShowErrorPage(true)
-                          }}
-                        >
-                          {({ elapsedTime, color }) => (
-                            <span style={{ color }}>
-                              {renderTime("seconds", getTimeSeconds(elapsedTime))}
-                            </span>
-                          )}
-                        </CountdownCircleTimer>
+                        <div className="d-flex justify-content-center">
+                          <CountdownCircleTimer
+                            {...timerProps}
+                            colors="#a5a6ff"
+                            duration={minuteSeconds}
+                            initialRemainingTime={minuteSeconds}
+                            onComplete={() => {
+                              setShowErrorPage(true)
+                            }}
+                          >
+                            {({ elapsedTime, color }) => (
+                              <span style={{ color }}>
+                                {renderTime("seconds", getTimeSeconds(elapsedTime))}
+                              </span>
+                            )}
+                          </CountdownCircleTimer>
                         </div>
                         <p className="mt-2">This takes upto a minute</p>
                       </>
@@ -232,8 +226,6 @@ const GenerateImageArtToolSection = () => {
                 onChange={setSelectedOption}
                 options={options}
               /> */}
-
-
                     </div>
                   )}
                   <div className="search-bar-head mb-3 p-2">
@@ -258,7 +250,6 @@ const GenerateImageArtToolSection = () => {
 
                       {
                         windowSize.current[0] > 800 &&
-
                         <div className="art-style ms-3">
                           <div className="btn-group dropup">
                             <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -268,7 +259,6 @@ const GenerateImageArtToolSection = () => {
                               {
                                 options.map((option) => {
                                   return (
-
                                     <li key={option.value}><a className="dropdown-item" defaultValue={selectedOption} onClick={() => handleArtStyleOptions(option.value)}>{option.value}</a></li>
                                   )
                                 })
