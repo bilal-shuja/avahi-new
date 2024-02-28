@@ -5,7 +5,7 @@ import checkCircle from "./Assets/checkCircle.svg";
 import clipboard from "./Assets/clipboard.svg";
 
 import underConstruction from "../Images/undraw_under_construction_-46-pa.svg";
-
+// chatbot section
 const AIChatSection = () => {
 
   const initialMessage = {
