@@ -23,6 +23,8 @@ import AISnapShotSection from "../AISnapShotSection/AISnapShotSection";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import IntroGui from "../Tabulars/Components/IntroGui";
 import ErrorPage from "../ErrorPages/ErrorPage";
+import ChatIntroGui from "../AIChatSection/Assets/ChatIntroGui";
+
 const Dashboard = () => {
 
   const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -65,6 +67,7 @@ const Dashboard = () => {
                   element={<AIAdvisorSection />}
                 />
 
+                <Route path="/AIChat" element={<ChatIntroGui />} />
                 <Route path="/AIChatSection" element={<AIChatSection />} />
 
                 <Route
@@ -72,20 +75,11 @@ const Dashboard = () => {
                   element={<AISnapShotSection />}
                 />
 
-
-                {/* <Route
-                  path="/TabularCSV"
-                  element={<TabularCSV />}
-                /> */}
-
                 <Route path="/TabularCSV" element={<TabularCSV />} />
-
-
                 <Route
                   path="/TabularCsvIntro"
                   element={<IntroGui />}
                 />
-
                 <Route
                   path="/TabularView"
                   element={<TabularView />}

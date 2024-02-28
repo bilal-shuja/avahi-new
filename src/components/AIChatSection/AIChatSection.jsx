@@ -184,161 +184,167 @@ const AIChatSection = () => {
 
   return (
     <div>
-            <div className="scroll-view-component scrollbar-secondary-component">
-            <div className="content-wrapper">
-      <div className='chat-bot-wrapper'>
-        <div className="messageWrapper">
-          <div className="chatMessage">
-            <div className="messageWrap">
-              <img src={BotProfile} alt="" />
-              <div className="message">
-                <div className="messageHeader">
-                  <span
-                    style={{
-                      display: "block",
-                      textAlign: "right",
-                      cursor: "pointer",
-                    }}
-                    onClick={() =>
-                      handleCopyToClipboard(
-                        "Hello! How can I assist you today?",
-                        "header"
-                      )
-                    }
-                  >
-                    <img
-                      src={clickedMessageIndex === "header" ? icon : clipboard}
-                      alt="icon"
-                      style={{ width: "17px" }}
-                    />
-                  </span>
+      <div className="scroll-view-component scrollbar-secondary-component">
+        <div className="content-wrapper">
+          <div className='chat-bot-wrapper'>
+            <div className="messageWrapper">
+              <div className="chatMessage">
+                <div className="messageWrap">
+                  <img src={BotProfile} alt="" />
+                  <div className="message">
+                    <div className="messageHeader">
+                      <span
+                        style={{
+                          display: "block",
+                          textAlign: "right",
+                          cursor: "pointer",
+                        }}
+                        onClick={() =>
+                          handleCopyToClipboard(
+                            "Hello! How can I assist you today?",
+                            "header"
+                          )
+                        }
+                      >
+                        <img
+                          src={clickedMessageIndex === "header" ? icon : clipboard}
+                          alt="icon"
+                          style={{ width: "17px" }}
+                        />
+                      </span>
+                    </div>
+                    Hello! Let's get started! <br /> I can help you with:
+                    <br />
+                    <p style={{marginTop:"15px"}}>
+                    - Help you study<br />
+                    - Brainstorming Ideas<br />
+                    - Generating business ideas<br />
+                    </p>
+                  </div>
                 </div>
-                Hello! How can I assist you today?
+
+
+                {chat
+                  .filter((item, index) => index !== 0) // Exclude the initial message
+                  .map(
+                    (item, i) =>
+                      item.role !== "system" && (
+                        <div
+                          key={i}
+                          ref={
+                            chat.length && chat.length - 2 <= i
+                              ? lastMessegeRef
+                              : null
+                          }
+                          className={
+                            item.role === "assistant"
+                              ? "messageWrap"
+                              : "messageWrapRight"
+                          }
+                        >
+                          {item.role === "assistant" ? (
+                            <>
+                              <img src={BotProfile} className="" alt="assistant profile" />
+                              <div className="message">
+                                <span
+                                  style={{
+                                    display: "block",
+                                    textAlign: "right",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() =>
+                                    handleCopyToClipboard(item.content, i)
+                                  }
+                                >
+                                  <img
+                                    src={i === clickedMessageIndex ? icon : clipboard}
+                                    alt="icon"
+                                    style={{ width: "17px" }}
+                                  />
+                                </span>
+
+                                <div
+                                  id="aiMessage"
+                                  dangerouslySetInnerHTML={{ __html: item.content }}
+                                />
+
+                                <span
+                                  style={{
+                                    display: "block",
+                                    textAlign: "right",
+                                    fontSize: "12px",
+                                    color: "GrayText",
+                                  }}
+                                >
+                                  {item.timestamp}
+                                </span>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="message">
+                                {item.content}
+                                <span
+                                  style={{
+                                    display: "block",
+                                    textAlign: "right",
+                                    fontSize: "12px",
+                                    color: "GrayText",
+                                  }}
+                                >
+                                  {item.timestamp}
+                                </span>
+                              </div>
+                              <div
+                                style={{
+                                  height: "30px",
+                                  width: "30px",
+                                  backgroundColor: "#232323",
+                                  borderRadius: "25px",
+                                }}
+                              >
+                                <i className="fa-regular fa-user text-white ms-2 mt-1" />
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      )
+                  )}
               </div>
             </div>
 
+            <div className='bottom-content'>
+              <div className='container'>
+                <hr />
+                <div className='d-flex'>
+                  <input className="form-control pt-3 pb-3 me-1" type="search" aria-label="Search"
+                    disabled={disableInput || aiTyping}
+                    name="message"
+                    value={message}
+                    variant="outlined"
+                    placeholder="Message"
+                    onChange={(e) => setMessage(e.target.value)}
+                    style={{ borderRadius: "10px" }}
+                  />
 
-            {chat
-              .filter((item, index) => index !== 0) // Exclude the initial message
-              .map(
-                (item, i) =>
-                  item.role !== "system" && (
-                    <div
-                      key={i}
-                      ref={
-                        chat.length && chat.length - 2 <= i
-                          ? lastMessegeRef
-                          : null
-                      }
-                      className={
-                        item.role === "assistant"
-                          ? "messageWrap"
-                          : "messageWrapRight"
-                      }
-                    >
-                      {item.role === "assistant" ? (
-                        <>
-                          <img src={BotProfile} alt="assistant profile" />
-                          <div className="message">
-                            <span
-                              style={{
-                                display: "block",
-                                textAlign: "right",
-                                cursor: "pointer",
-                              }}
-                              onClick={() =>
-                                handleCopyToClipboard(item.content, i)
-                              }
-                            >
-                              <img
-                                src={i === clickedMessageIndex ? icon : clipboard}
-                                alt="icon"
-                                style={{ width: "17px" }}
-                              />
-                            </span>
+                  {
+                    message !== "" ? (
+                      <button className='btn btn-outline-dark ms-1 rounded-3' variant="contained"
+                        onClick={sendMessage}
+                      > <i className="fa-solid fa-paper-plane" />
+                      </button>
+                    ) : (
+                      <button className='btn btn-outline-dark ms-1 rounded-3' variant="contained" > <i className="fa-solid fa-paper-plane" />
+                      </button>
+                    )
+                  }
 
-                            <div
-                              id="aiMessage"
-                              dangerouslySetInnerHTML={{ __html: item.content }}
-                            />
-
-                            <span
-                              style={{
-                                display: "block",
-                                textAlign: "right",
-                                fontSize: "12px",
-                                color: "GrayText",
-                              }}
-                            >
-                              {item.timestamp}
-                            </span>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="message">
-                            {item.content}
-                            <span
-                              style={{
-                                display: "block",
-                                textAlign: "right",
-                                fontSize: "12px",
-                                color: "GrayText",
-                              }}
-                            >
-                              {item.timestamp}
-                            </span>
-                          </div>
-                          <div
-                            style={{
-                              height: "30px",
-                              width: "30px",
-                              backgroundColor: "#232323",
-                              borderRadius: "25px",
-                            }}
-                          >
-                            <i className="fa-regular fa-user text-white ms-2 mt-1" />
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  )
-              )}
-          </div>
-        </div>
-
-        <div className='bottom-content'>
-          <div className='container'>
-            <hr />
-            <div className='d-flex'>
-              <input className="form-control pt-3 pb-3 me-1" type="search" aria-label="Search"
-                disabled={disableInput || aiTyping}
-                name="message"
-                value={message}
-                variant="outlined"
-                placeholder="Message"
-                onChange={(e) => setMessage(e.target.value)}
-                style={{ borderRadius: "10px" }}
-              />
-
-              {
-                message !== "" ? (
-                  <button className='btn btn-outline-dark ms-1 rounded-3' variant="contained"
-                    onClick={sendMessage}
-                  > <i className="fa-solid fa-paper-plane" />
-                  </button>
-                ) : (
-                  <button className='btn btn-outline-dark ms-1 rounded-3' variant="contained" > <i className="fa-solid fa-paper-plane" />
-                  </button>
-                )
-              }
-
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };
