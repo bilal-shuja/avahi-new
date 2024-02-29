@@ -84,19 +84,32 @@ const Sidebar = ({ isVisible, toggleSidebar }) => {
 
 
                 <li className="menu-item mt-2">
-                  <Link to="/AIAdvisorSection" className="menu-link">
+                  <Link to="/Summarizer" className="menu-link">
                     <i className="menu-icon tf-icons fa-solid fa-paperclip" />
-                    <div data-i18n="AI Advisor">AI Advisor</div>
+                    <div data-i18n="AI Advisor">Summarizer</div>
                   </Link>
                 </li>
 
 
-                
+                <li className="menu-item mt-2">
+                  <Link to="/MeetingInsight" className="menu-link">
+                    <i className="menu-icon tf-icons fa-solid fa-paper-plane" />
+                    <div data-i18n="AI Snapshot">Meeting Insights</div>
+                  </Link>
+                </li>
 
                 <li className="menu-item mt-2">
-                  <Link to="/AISnapShotSection" className="menu-link">
-                    <i className="menu-icon tf-icons fa-solid fa-paper-plane" />
-                    <div data-i18n="AI Snapshot">AI Snapshot</div>
+                  <Link to="/TextToVideo" className="menu-link">
+                    <i className="menu-icon tf-icons fa-solid  fa-photo-film" />
+                    <div data-i18n="AI Advisor">Text To Video</div>
+                  </Link>
+                </li>
+
+
+                <li className="menu-item mt-2">
+                  <Link to="/DataExtractor" className="menu-link">
+                    <i className="menu-icon tf-icons fa-solid fa-gears" />
+                    <div data-i18n="AI Snapshot">Data Extractor</div>
                   </Link>
                 </li>
 

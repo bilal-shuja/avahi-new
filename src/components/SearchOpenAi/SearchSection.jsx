@@ -88,8 +88,8 @@ const SearchSection = () => {
                     cardData.map((items) => {
                       return (
                         <>
-                          <div className="col-lg-4 mb-1 p-1">
-                            <div className="card">
+                          <div className="col-lg-4">
+                            <div className="card mb-2">
                               <div className="d-flex">
                                 <div className="icon-card  mt-3 ms-1 me-1">
                                   <i className={items.icon}></i>
@@ -185,7 +185,7 @@ const SearchSection = () => {
               </div>
 
 
-              <div className="mb-2">
+              <div className="mb-2 ms-1 me-2">
                 <div className="row">
                   <div className="col-lg-6 mx-auto">
                     <div className="">

@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+// import Select from "react-select";
+import HashLoader from "react-spinners/HashLoader";
 import SampleImg from "../Images/sampleImg.jpg";
 import ErrorPage from "../ErrorPages/ErrorPage";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
@@ -10,7 +12,9 @@ const GenerateImageArtToolSection = () => {
   const [imageTextInput, setImageTextInput] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
+  const [color, setColor] = useState("#696cff");
   const [showErrorPage, setShowErrorPage] = useState(false)
+  const [errorTxt,setErrorTxt]=useState("It usually takes upto 1 minute")
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
 
   const options = [
@@ -68,6 +72,7 @@ const GenerateImageArtToolSection = () => {
   };
 
   function generateImage() {
+    setErrorTxt("It usually takes upto 1 minute")
     setLoading(true);
     const requestOptions = {
       method: "GET",
@@ -80,23 +85,39 @@ const GenerateImageArtToolSection = () => {
     )
       .then((response) => response.json())
       .then((result) => {
-        setImageInput((prevImages) => [...prevImages, result.base_64_img_str]);
-        setLoading(false);
-        setShowErrorPage(false)
+        console.log("this is response,", result)
+        console.log("yay i got run")
+        if(result){
+          setLoading(false);
+
+          if(result.base_64_img_str){
+            setShowErrorPage(false)
+            setImageInput((prevImages) => [...prevImages, result.base_64_img_str]);
+          }
+          else{
+            setShowErrorPage(true)
+
+          }
+        }
+    
+
       })
       .catch((error) => {
         console.error("this is error", error);
         setShowErrorPage(true)
+        setLoading(false);
+
       });
   }
 
-  // /for countdown timer
   const minuteSeconds = 60;
+
   const timerProps = {
     isPlaying: true,
     size: 120,
     strokeWidth: 6
   };
+
   const renderTime = (dimension, time) => {
     return (
       <div className="time-wrapper">
@@ -105,6 +126,7 @@ const GenerateImageArtToolSection = () => {
       </div>
     );
   };
+
   const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
 
   return (
@@ -116,7 +138,7 @@ const GenerateImageArtToolSection = () => {
               <div className="container-xxl flex-grow-1">
 
                 <h4 className="fw-bold mb-4 mt-3">
-                  <span className="text-muted fw-light"></span> Gen Text To Image
+                  <span className="text-muted fw-light"></span> Turn Imaginations Into Reality
                 </h4>
                 {
                   windowSize.current[0] < 800 &&
@@ -144,24 +166,25 @@ const GenerateImageArtToolSection = () => {
                   <div className="centered-div">
                     {loading === true ? (
                       <>
-                        <div className="d-flex justify-content-center">
-                          <CountdownCircleTimer
-                            {...timerProps}
-                            colors="#a5a6ff"
-                            duration={minuteSeconds}
-                            initialRemainingTime={minuteSeconds}
-                            onComplete={() => {
-                              setShowErrorPage(true)
-                            }}
-                          >
-                            {({ elapsedTime, color }) => (
-                              <span style={{ color }}>
-                                {renderTime("seconds", getTimeSeconds(elapsedTime))}
-                              </span>
-                            )}
-                          </CountdownCircleTimer>
+                      <div className="d-flex justify-content-center">
+                        <CountdownCircleTimer
+                          {...timerProps}
+                          colors="#a5a6ff"
+                          duration={minuteSeconds}
+                          initialRemainingTime={minuteSeconds}
+                          onComplete={() => {
+                            // setShowErrorPage(true)
+                          setErrorTxt("Its taking more than expected please wait..")
+                          }}
+                        >
+                          {({ elapsedTime, color }) => (
+                            <span style={{ color }}>
+                              {renderTime("seconds", getTimeSeconds(elapsedTime))}
+                            </span>
+                          )}
+                        </CountdownCircleTimer>
                         </div>
-                        <p className="mt-2">This takes upto a minute</p>
+                        <p className="mt-2">{errorTxt}</p>
                       </>
                     ) : imageInput && imageInput.length > 0 ? (
                       <div
@@ -226,6 +249,8 @@ const GenerateImageArtToolSection = () => {
                 onChange={setSelectedOption}
                 options={options}
               /> */}
+
+
                     </div>
                   )}
                   <div className="search-bar-head mb-3 p-2">
@@ -233,7 +258,7 @@ const GenerateImageArtToolSection = () => {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ask to follow-up..."
+                        placeholder="Add prompt here"
                         value={imageTextInput}
                         onChange={(e) => setImageTextInput(e.target.value)}
                       />
@@ -250,6 +275,7 @@ const GenerateImageArtToolSection = () => {
 
                       {
                         windowSize.current[0] > 800 &&
+
                         <div className="art-style ms-3">
                           <div className="btn-group dropup">
                             <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -259,6 +285,7 @@ const GenerateImageArtToolSection = () => {
                               {
                                 options.map((option) => {
                                   return (
+
                                     <li key={option.value}><a className="dropdown-item" defaultValue={selectedOption} onClick={() => handleArtStyleOptions(option.value)}>{option.value}</a></li>
                                   )
                                 })

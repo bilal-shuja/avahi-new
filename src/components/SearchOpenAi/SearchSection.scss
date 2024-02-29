@@ -48,7 +48,19 @@
 }
 // ///////////////////////////////////////////////////////////////////////
 
-
+.fixed-bottom-search{
+  background-color: #FCFCF9;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  border-radius: 50px;
+  width: 49%;
+  left: 52%;
+  transform: translateX(-50%);
+  border: 7px solid #F3F3EE;
+}
 
 
 
