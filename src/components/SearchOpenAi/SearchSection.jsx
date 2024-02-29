@@ -112,53 +112,54 @@ const SearchSection = () => {
             </div>
 
             <div className="fixed-bottom">
-              <div
-                className={
-                  selectedImages.length > 0 ? "ImageContainer mt-2" : ""
-                }
-              >
-                {selectedImages.length > 0 && (
-                  <div className="selected-images-container">
-                    {selectedImages.map((image, index) => (
-                      <div key={index} className="selected-image">
-                        <img
-                          src={URL.createObjectURL(image)}
-                          alt={`Selected ${index + 1}`}
-                        />
-                        <span onClick={() => removeImage(index)}>&times;</span>
-                      </div>
-                    ))}
+              <div className="">
+                <div
+                  className={
+                    selectedImages.length > 0 ? "ImageContainer mt-2" : ""
+                  }
+                >
+                  {selectedImages.length > 0 && (
+                    <div className="selected-images-container">
+                      {selectedImages.map((image, index) => (
+                        <div key={index} className="selected-image">
+                          <img
+                            src={URL.createObjectURL(image)}
+                            alt={`Selected ${index + 1}`}
+                          />
+                          <span onClick={() => removeImage(index)}>&times;</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {showSuggestions === true ? null : (
+                  <div className="text-center mt-4 mb-4">
+                    <div className="focus-btn mb-3 d-flex justify-content-center">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-light focus-btnn ps-3 pe-3 p-2"
+                      >
+                        <i className="fas fa-bullseye" /> Focus
+                      </button>
+                      &nbsp;&nbsp;
+                    </div>
+
+                    <span class="badge rounded-pill bg-light p-2 text-dark pill-one">
+                      🎾 Wimbledon 2023 winners
+                    </span>
+                    &nbsp; &nbsp;
+                    <span class="badge rounded-pill bg-light p-2 text-dark pill-two ">
+                      🤖 Ai and Earning
+                    </span>
+                    &nbsp; &nbsp;
+                    <span class="badge rounded-pill bg-light p-2 text-dark pill-three mt-3">
+                      🚀 Ai and Earning
+                    </span>
                   </div>
                 )}
-              </div>
 
-              {showSuggestions === true ? null : (
-                <div className="text-center mt-4 mb-4">
-                  <div className="focus-btn mb-3 d-flex justify-content-center">
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-light focus-btnn ps-3 pe-3 p-2"
-                    >
-                      <i className="fas fa-bullseye" /> Focus
-                    </button>
-                    &nbsp;&nbsp;
-                  </div>
-
-                  <span class="badge rounded-pill bg-light p-2 text-dark pill-one">
-                    🎾 Wimbledon 2023 winners
-                  </span>
-                  &nbsp; &nbsp;
-                  <span class="badge rounded-pill bg-light p-2 text-dark pill-two ">
-                    🤖 Ai and Earning
-                  </span>
-                  &nbsp; &nbsp;
-                  <span class="badge rounded-pill bg-light p-2 text-dark pill-three mt-3">
-                    🚀 Ai and Earning
-                  </span>
-                </div>
-              )}
-
-              {/* {showSuggestions === true ? null : (
+                {/* {showSuggestions === true ? null : (
                 <img
                   src={bulb}
                   className="img-fluid float-end"
@@ -168,51 +169,52 @@ const SearchSection = () => {
                 />
               )} */}
 
-              <div className="d-flex justify-content-center">
-                {showSuggestions && (
-                  <ul className="suggestion-list w-75">
-                    {filteredSuggestions.map((suggestion, index) => (
-                      <li
-                        key={index}
-                        onClick={() => handleSuggestionClick(suggestion)}
-                        style={{ fontSize: "12px" }}
-                      >
-                        <a className="text-black">{suggestion}</a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-
-
-              <div className="mb-2 ms-1 me-2">
-                <div className="row">
-                  <div className="col-lg-6 mx-auto">
-                    <div className="">
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className="form-control search-query-input"
-                          placeholder="Search anything..."
-                          aria-label="Username"
-                          aria-describedby="basic-addon1"
-                          value={searchTerm}
-                          onChange={handleInputChange}
-                          onFocus={() => setExpanded(true)}
-                        />
-                        <span
-                          className="input-group-text search-query-input-inner"
-                          id="basic-addon1"
-                          onClick={navigateScreen}
+                <div className="d-flex justify-content-center">
+                  {showSuggestions && (
+                    <ul className="suggestion-list w-75">
+                      {filteredSuggestions.map((suggestion, index) => (
+                        <li
+                          key={index}
+                          onClick={() => handleSuggestionClick(suggestion)}
+                          style={{ fontSize: "12px" }}
                         >
-                          <img
-                            className="img-fluid"
-                            src={magnifyGlass}
-                            alt=""
-                            width={23}
-                            style={{ cursor: "pointer" }}
+                          <a className="text-black">{suggestion}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+
+                <div className="mb-2 ms-1 me-2">
+                  <div className="row">
+                    <div className="col-lg-6 mx-auto">
+                      <div className="">
+                        <div className="input-group">
+                          <input
+                            type="text"
+                            className="form-control search-query-input"
+                            placeholder="Search anything..."
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            value={searchTerm}
+                            onChange={handleInputChange}
+                            onFocus={() => setExpanded(true)}
                           />
-                        </span>
+                          <span
+                            className="input-group-text search-query-input-inner"
+                            id="basic-addon1"
+                            onClick={navigateScreen}
+                          >
+                            <img
+                              className="img-fluid"
+                              src={magnifyGlass}
+                              alt=""
+                              width={23}
+                              style={{ cursor: "pointer" }}
+                            />
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>

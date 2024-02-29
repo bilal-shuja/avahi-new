@@ -173,7 +173,6 @@ const GenerateImageArtToolSection = () => {
                           duration={minuteSeconds}
                           initialRemainingTime={minuteSeconds}
                           onComplete={() => {
-                            // setShowErrorPage(true)
                           setErrorTxt("Its taking more than expected please wait..")
                           }}
                         >

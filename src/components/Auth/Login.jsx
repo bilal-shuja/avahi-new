@@ -17,7 +17,7 @@ const Login = () => {
   const userLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (login.email === "admin11@gmail.com" && login.password === "admin11") {
+    if (login.email === "user@avahi.com" && login.password === "user123") {
       setLoading(false);
       setInput(false);
       localStorage.setItem("Count_me-in", true);

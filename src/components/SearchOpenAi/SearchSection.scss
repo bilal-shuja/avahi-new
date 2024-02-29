@@ -46,20 +46,27 @@
 .search-query-input-inner {
   cursor: pointer;
 }
+
 // ///////////////////////////////////////////////////////////////////////
 
-.fixed-bottom-search{
-  background-color: #FCFCF9;
+.fixed-bottom-search {
   position: fixed;
   bottom: 10px;
   left: 0;
   right: 0;
   z-index: 999;
-  border-radius: 50px;
-  width: 49%;
+  border-radius: 20px;
+  width: 90%;
+  height: 100px;
   left: 52%;
   transform: translateX(-50%);
-  border: 7px solid #F3F3EE;
+
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
 }
 
 
@@ -267,4 +274,3 @@
     color: #696cff;
   }
 }
-
