@@ -69,6 +69,7 @@ const SearchSection = () => {
       icon: "fa-solid fa-bookmark"
     },
   ]
+
   return (
     <>
       <div className="scroll-view-component scrollbar-secondary-component">
@@ -78,8 +79,8 @@ const SearchSection = () => {
               Ask data &nbsp;
               <i className="fa-solid fa-wand-magic-sparkles text-primary" />
             </h1>
-
-            <div className="d-flex justify-content-center ">
+            {/* <div className="fixed-bottom"> */}
+            <div className="d-flex justify-content-center">
 
               <div className="col-lg-7">
                 <div className="row">
@@ -111,7 +112,7 @@ const SearchSection = () => {
               </div>
             </div>
 
-            <div className="fixed-bottom">
+            <div className="">
               <div className="">
                 <div
                   className={
@@ -185,42 +186,45 @@ const SearchSection = () => {
                   )}
                 </div>
 
-
-                <div className="mb-2 ms-1 me-2">
-                  <div className="row">
-                    <div className="col-lg-6 mx-auto">
-                      <div className="">
-                        <div className="input-group">
-                          <input
-                            type="text"
-                            className="form-control search-query-input"
-                            placeholder="Search anything..."
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            value={searchTerm}
-                            onChange={handleInputChange}
-                            onFocus={() => setExpanded(true)}
-                          />
-                          <span
-                            className="input-group-text search-query-input-inner"
-                            id="basic-addon1"
-                            onClick={navigateScreen}
-                          >
-                            <img
-                              className="img-fluid"
-                              src={magnifyGlass}
-                              alt=""
-                              width={23}
-                              style={{ cursor: "pointer" }}
+                <div className="fixed-bottom">
+                  <div className="mb-2 ms-1 me-2">
+                    <div className="row">
+                      <div className="col-lg-6 mx-auto">
+                        <div className="">
+                          <div className="input-group">
+                            <input
+                              type="text"
+                              className="form-control search-query-input"
+                              placeholder="Search anything..."
+                              aria-label="Username"
+                              aria-describedby="basic-addon1"
+                              value={searchTerm}
+                              onChange={handleInputChange}
+                              onFocus={() => setExpanded(true)}
                             />
-                          </span>
+                            <span
+                              className="input-group-text search-query-input-inner"
+                              id="basic-addon1"
+                              onClick={navigateScreen}
+                            >
+                              <img
+                                className="img-fluid"
+                                src={magnifyGlass}
+                                alt=""
+                                width={23}
+                                style={{ cursor: "pointer" }}
+                              />
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
+            {/* </div> */}
           </div>
         </div>
       </div>

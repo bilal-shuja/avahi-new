@@ -50,14 +50,18 @@
 // ///////////////////////////////////////////////////////////////////////
 
 .fixed-bottom-search {
-  position: fixed;
+
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  // position: fixed;
   bottom: 10px;
   left: 0;
   right: 0;
   z-index: 999;
   border-radius: 20px;
   width: 90%;
-  height: 100px;
+  // height: 100px;
   left: 52%;
   transform: translateX(-50%);
 
