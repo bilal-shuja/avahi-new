@@ -54,6 +54,10 @@
   color : #1b1919 ;
   letter-spacing : 2px ;
   transition : all .3s ease ;
+  -webkit-transition: all .3s ease; /* Safari */
+  -moz-transition: all .3s ease; /* Firefox */
+  -o-transition: all .3s ease; /* Opera */
+  transition: all .3s ease; /* Standard syntax */
 }
 .button__text{
   display : flex ;
@@ -72,6 +76,10 @@
   border-radius : 2px ;
   background : #697a8d;
   transition : all .5s ease ;
+  -webkit-transition: all .5s ease; /* Safari */
+  -moz-transition: all .5s ease; /* Firefox */
+  -o-transition: all .5s ease; /* Opera */
+  transition: all .5s ease; /* Standard syntax */
 }
 .button-tab-intro::before{
   top : 0 ;
@@ -202,8 +210,14 @@
   background : #E9ECFF ;
 }
 .button-tab-intro:hover .button__drow1{
-  animation : drow1 ease-in .06s ;
-  animation-fill-mode : forwards ;
+  -webkit-animation: drow1 ease-in .06s;
+  -moz-animation: drow1 ease-in .06s;
+  -o-animation: drow1 ease-in .06s;
+  animation: drow1 ease-in .06s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 .button-tab-intro:hover .button__drow1::before{
   animation : drow2 linear .08s .06s ;

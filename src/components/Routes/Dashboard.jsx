@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Forms from "../Forms/Forms";
 import Sheets from "../Sheets/Sheets";
 import Navbar from "../Layout/Navbar";
@@ -28,11 +28,17 @@ import DataExtractor from "../DataExtractorAi/DataExtractor";
 
 const Dashboard = () => {
 
-  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(
+    localStorage.getItem('sidebarVisible') === 'true'
+  );
 
   const toggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
   };
+
+  useEffect(() => {
+    localStorage.setItem('sidebarVisible', sidebarVisible);
+  }, [sidebarVisible]);
 
   return (
     <>

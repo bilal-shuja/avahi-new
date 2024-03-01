@@ -31,15 +31,12 @@ const GenerateImageArtSection = () => {
                           Transform your words into stunning AI visuals with our text-to-image feature
                         </p>
                       </div>
-
-
                       <button onClick={navigateToImageArtTool} className="btn btn-outline-dark btn-xs" style={{ borderRadius: "0.7em", }}>Generate Art</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

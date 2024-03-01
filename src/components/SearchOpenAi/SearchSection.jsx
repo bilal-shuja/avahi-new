@@ -1,11 +1,12 @@
 import "./SearchSection.scss";
 import Search from "./Search.json";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import bulb from "../Images/Lightbulb2.webp";
 import { useNavigate } from "react-router-dom";
 import magnifyGlass from "../Images/icons8-magnifying-glass.gif";
 
 const SearchSection = () => {
+  const sideBar = localStorage.getItem('sidebarVisible')
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -45,8 +46,7 @@ const SearchSection = () => {
     updatedImages.splice(index, 1);
     setSelectedImages(updatedImages);
   };
-
-
+  
   const cardData = [
     {
       title: "Zero-cost Possibilities",
@@ -111,8 +111,8 @@ const SearchSection = () => {
 
               </div>
             </div>
-
-            <div className="">
+            
+            <div className="fixed-bottom-search"  style={{ marginLeft: sideBar === 'true' ? '0px' :'90px'  }}>
               <div className="">
                 <div
                   className={
@@ -135,7 +135,7 @@ const SearchSection = () => {
                 </div>
 
                 {showSuggestions === true ? null : (
-                  <div className="text-center mt-4 mb-4">
+                  <div className="text-center">
                     <div className="focus-btn mb-3 d-flex justify-content-center">
                       <button
                         type="button"
@@ -161,14 +161,14 @@ const SearchSection = () => {
                 )}
 
                 {/* {showSuggestions === true ? null : (
-                <img
-                  src={bulb}
-                  className="img-fluid float-end"
-                  alt=""
-                  width={150}
-                // style={{marginTop:"7em"}}
-                />
-              )} */}
+                  <img
+                    src={bulb}
+                    className="img-fluid float-end"
+                    alt=""
+                    width={150}
+                  // style={{marginTop:"7em"}}
+                  />
+                )} */}
 
                 <div className="d-flex justify-content-center">
                   {showSuggestions && (
@@ -186,8 +186,8 @@ const SearchSection = () => {
                   )}
                 </div>
 
-                <div className="fixed-bottom">
-                  <div className="mb-2 ms-1 me-2">
+                <div className="">
+                  <div className="mb-2 mt-3">
                     <div className="row">
                       <div className="col-lg-6 mx-auto">
                         <div className="">
