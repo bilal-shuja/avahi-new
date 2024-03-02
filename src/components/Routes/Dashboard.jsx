@@ -38,7 +38,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     localStorage.setItem('sidebarVisible', sidebarVisible);
-  }, [sidebarVisible]);
+  });
 
   return (
     <>

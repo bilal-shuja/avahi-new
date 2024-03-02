@@ -4,9 +4,13 @@ import React, { useState, useEffect } from "react";
 import bulb from "../Images/Lightbulb2.webp";
 import { useNavigate } from "react-router-dom";
 import magnifyGlass from "../Images/icons8-magnifying-glass.gif";
+import Sidebar from "../Layout/Sidebar";
 
 const SearchSection = () => {
-  const sideBar = localStorage.getItem('sidebarVisible')
+
+  
+  const sideBar = localStorage.getItem('sidebarVisible') 
+  
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -111,8 +115,17 @@ const SearchSection = () => {
 
               </div>
             </div>
+            {showSuggestions === true ? null : (
+                  <img
+                    src={bulb}
+                    className="img-fluid float-end"
+                    alt=""
+                    width={150}
+                  // style={{marginTop:"7em"}}
+                  />
+                )}
             
-            <div className="fixed-bottom-search"  style={{ marginLeft: sideBar === 'true' ? '0px' :'90px'  }}>
+            <div className="fixed-bottom-search"  style={{ marginLeft: sideBar === "true" ? '0px' :'90px'  }}>
               <div className="">
                 <div
                   className={
@@ -160,15 +173,7 @@ const SearchSection = () => {
                   </div>
                 )}
 
-                {/* {showSuggestions === true ? null : (
-                  <img
-                    src={bulb}
-                    className="img-fluid float-end"
-                    alt=""
-                    width={150}
-                  // style={{marginTop:"7em"}}
-                  />
-                )} */}
+                
 
                 <div className="d-flex justify-content-center">
                   {showSuggestions && (

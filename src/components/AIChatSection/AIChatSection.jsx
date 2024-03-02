@@ -58,6 +58,7 @@ const AIChatSection = () => {
       if (!api_response.ok) {
         throw new Error('Network response was not ok.');
       }
+      setLoading(false);
 
       const reader = api_response.body.getReader();
       const decoder = new TextDecoder();
@@ -92,7 +93,6 @@ const AIChatSection = () => {
         });
       }
       StrActiveRef.current = true;
-      setLoading(false);
     } catch (error) {
       setError(error.message || 'An error occurred while fetching data.');
       console.error('Error fetching data:', error);
@@ -103,12 +103,12 @@ const AIChatSection = () => {
 
   const userAddhistory = (e) => {
     e.preventDefault();
-      if (userPrompt.length > 0) {
-        setUserPrompt('');
-        setMessageHistory(curr => [...curr, { role: 'user', content: userPrompt }]);
-        postMessage();
-      }
-    
+    if (userPrompt.length > 0) {
+      setUserPrompt('');
+      setMessageHistory(curr => [...curr, { role: 'user', content: userPrompt }]);
+      postMessage();
+    }
+
     else {
       setUserPrompt('');
     }
@@ -226,53 +226,81 @@ const AIChatSection = () => {
                         )
                       }
                       else {
-                        return (
-                          <>
+                        const isLastMessage = index === messageHistory.length - 1;
+                        if (isLastMessage && loading) {
+                          return (
+                            <>
                             <div ref={
                               messageHistory.length && messageHistory.length > 0
                                 ? lastMessegeRef
                                 : null} className="messageWrap">
                               <img src={BotProfile} alt="assistant profile" />
                               <div className="message">
-                                <span
-                                  style={{
-                                    display: "block",
-                                    textAlign: "right",
-                                    cursor: "pointer",
-                                  }}
-                                  onClick={() =>
-                                    handleCopyToClipboard(item.content)
-                                  }
-                                >
-                                  <img
-                                    src={icon}
-                                    alt="icon"
-                                    style={{ width: "17px" }}
-                                  />
-                                </span>
+                                {/* <div
+                                id="aiMessage"
+                                dangerouslySetInnerHTML={{ __html: `${item.content}` }}
+                              /> */}
 
-                                <div
-                                  id="aiMessage"
-                                  dangerouslySetInnerHTML={{ __html: `${item.content}` }}
-                                />
-                                {
-                                  item.content.length > 20 ? (
-                                    <>
-                                      <div className='d-flex justify-content-end pt-1' >
-                                        <div className="yes" onClick={() => shareFeedback('Positive')}>
-                                          <i className='fa-solid fa-thumbs-up'></i>
-                                        </div>
-                                        <div className="no ms-2" onClick={() => shareFeedback('Negative')}>
-                                          <i className='fa-solid fa-thumbs-down'></i>
-                                        </div>
-                                      </div>
-                                    </>
-                                  ) : null
-                                }
+                                <div className="d-flex justify-content-center">
+                                  <div className="spinner-border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                  </div>
+                                </div>
+
+
                               </div>
                             </div>
                           </>
-                        )
+                          )
+                        }
+                        else {
+                          return (
+                            <>
+                              <>
+                              <div ref={
+                                messageHistory.length && messageHistory.length > 0
+                                  ? lastMessegeRef
+                                  : null} className="messageWrap">
+                                <img src={BotProfile} alt="assistant profile" />
+                                <div className="message">
+                                  <span
+                                    style={{
+                                      display: "block",
+                                      textAlign: "right",
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() => handleCopyToClipboard(item.content)}
+                                  >
+                                    <img
+                                      src={icon}
+                                      alt="icon"
+                                      style={{ width: "17px" }}
+                                    />
+                                  </span>
+                                  <div
+                                    id="aiMessage"
+                                    dangerouslySetInnerHTML={{ __html: `${item.content}` }}
+                                  />
+                                  {
+                                    item.content.length > 20 ? (
+                                      <>
+                                        <div className='d-flex justify-content-end pt-1' >
+                                          <div className="yes" onClick={() => shareFeedback('Positive')}>
+                                            <i className='fa-solid fa-thumbs-up'></i>
+                                          </div>
+                                          <div className="no ms-2" onClick={() => shareFeedback('Negative')}>
+                                            <i className='fa-solid fa-thumbs-down'></i>
+                                          </div>
+                                        </div>
+                                      </>
+                                    ) : null
+                                  }
+                                </div>
+                              </div>
+                            </>
+                            </>
+                          )
+                        }
                       }
                     })
                   }
