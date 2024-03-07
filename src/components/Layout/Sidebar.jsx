@@ -3,20 +3,17 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = ({ isVisible, toggleSidebar }) => {
 
-  const [activeItem, setActiveItem] = useState('');
+  const [activeItem, setActiveItem] = useState('GenericAI');
 
   const handleMenuItemClick = (item) => {
     setActiveItem(item);
   };
 
-
   return (
     <div>
       {
         isVisible && (
-          <aside id="layout-menu" className={`layout-menu menu-vertical menu bg-menu-theme ${isVisible ? 'sidebar-open' : false}`}
-
-          >
+          <aside id="layout-menu" className={`layout-menu menu-vertical menu bg-menu-theme ${isVisible ? 'sidebar-open' : false}`}>
             <div className="app-brand demo">
               <a href="#" className="app-brand-link">
                 <i className="fa-brands fa-squarespace fs-2" />
@@ -28,7 +25,6 @@ const Sidebar = ({ isVisible, toggleSidebar }) => {
 
             </div>
             <div className="scroll-view scrollbar-secondary">
-
               <ul className="menu-inner">
                 <li className={`mt-2 menu-item ${activeItem === 'GenericAI' ? 'active' : ''}`} onClick={() => handleMenuItemClick('GenericAI')}>
                   <Link to="/" className="menu-link">
@@ -37,14 +33,12 @@ const Sidebar = ({ isVisible, toggleSidebar }) => {
                   </Link>
                 </li>
 
-
                 <li className={`mt-2 menu-item ${activeItem === 'Stability' ? 'active' : ''}`} onClick={() => handleMenuItemClick('Stability')}>
                   <Link to="/GenerateImageArt" className="menu-link">
                     <i className="menu-icon tf-icons fa-solid fa-magnifying-glass" />
                     <div data-i18n="Home">Stability AI</div>
                   </Link>
                 </li>
-
 
                 <li className={`mt-2 menu-item ${activeItem === 'Tabular' ? 'active' : ''}`} onClick={() => handleMenuItemClick('Tabular')}>
                   <Link to="/TabularCsvIntro" className="menu-link">
@@ -60,10 +54,7 @@ const Sidebar = ({ isVisible, toggleSidebar }) => {
                   </Link>
                 </li>
 
-
                 <li className="menu-header small text-uppercase" ><span className="menu-header-text">Up Comings</span></li>
-
-
 
                 <li className={`mt-2 menu-item ${activeItem === 'Summarizer' ? 'active' : ''}`} onClick={() => handleMenuItemClick('Summarizer')}>
                   <Link to="/Summarizer" className="menu-link">
@@ -71,7 +62,6 @@ const Sidebar = ({ isVisible, toggleSidebar }) => {
                     <div data-i18n="AI Advisor">Summarizer</div>
                   </Link>
                 </li>
-
 
                 <li className={`mt-2 menu-item ${activeItem === 'Meetings' ? 'active' : ''}`} onClick={() => handleMenuItemClick('Meetings')}>
                   <Link to="/MeetingInsight" className="menu-link">
@@ -86,7 +76,6 @@ const Sidebar = ({ isVisible, toggleSidebar }) => {
                     <div data-i18n="AI Advisor">Text To Video</div>
                   </Link>
                 </li>
-
 
                 <li className={`mt-2 menu-item ${activeItem === 'Extractor' ? 'active' : ''}`} onClick={() => handleMenuItemClick('Extractor')}>
                   <Link to="/DataExtractor" className="menu-link">

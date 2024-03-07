@@ -76,7 +76,7 @@ const SearchSection = () => {
 
   return (
     <>
-      <div className="scroll-view-component scrollbar-secondary-component">
+      <div className="scroll-view-component scrollbar-secondary-component" style={{overflow:"hidden"}}>
         <div className="content-wrapper">
           <div className="">
             <h1 className="main-heading">
@@ -115,7 +115,7 @@ const SearchSection = () => {
 
               </div>
             </div>
-            {showSuggestions === true ? null : (
+            {/* {showSuggestions === true ? null : (
                   <img
                     src={bulb}
                     className="img-fluid float-end"
@@ -124,8 +124,8 @@ const SearchSection = () => {
                   // style={{marginTop:"7em"}}
                   />
                 )}
-            
-            <div className="fixed-bottom-search"  style={{ marginLeft: sideBar === "true" ? '0px' :'90px'  }}>
+             */}
+            <div className="mt-5">
               <div className="">
                 <div
                   className={
@@ -192,8 +192,8 @@ const SearchSection = () => {
                 </div>
 
                 <div className="">
-                  <div className="mb-2 mt-3">
-                    <div className="row">
+                  <div className="mb-2 mt-4">
+                    <div className="">
                       <div className="col-lg-6 mx-auto">
                         <div className="">
                           <div className="input-group">
