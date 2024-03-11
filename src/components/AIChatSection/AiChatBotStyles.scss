@@ -1,0 +1,142 @@
+.chat-bot-wrapper{
+    position: relative;
+    height: 85vh;
+}
+.bottom-content{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.messageWrapper {
+    padding: 22px 18px;
+    display: flex;
+    flex-direction: column;
+    .messageSender {
+      background: #f7f9fb;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      margin-top: auto;
+      :global(.MuiInputBase-root) {
+        width: 100%;
+        flex-grow: 1;
+        input {
+          border: none !important;
+          min-height: 32px;
+          padding: 0 10px !important;
+        }
+      }
+      .sendBtnWrapper {
+        min-width: 32px;
+        min-height: 32px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      fieldset {
+        display: none;
+      }
+    }
+    .chatMessage {
+      padding: 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-family: "Inter", sans-serif;
+      height: 100vh;
+      max-height: calc(100vh - 260px);
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+      .messageWrap {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+        img {
+          width: 32px;
+          height: 32px;
+        }
+        .message {
+          background: #f2f4f7;
+          padding: 5px 14px;
+          box-shadow:
+            0px 1px 3px rgba(16, 24, 40, 0.1),
+            0px 1px 2px rgba(16, 24, 40, 0.06);
+          border-radius: 8px 0px 8px 8px;
+          color: #101828;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          b {
+            display: block;
+            margin-bottom: 10px;
+            color: #686868;
+          }
+        }
+      }
+      .messageWrapRight {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        align-items: end;
+        .message {
+          background: #f2f4f7;
+          padding: 5px 14px;
+          box-shadow:
+            0px 1px 3px rgba(16, 24, 40, 0.1),
+            0px 1px 2px rgba(16, 24, 40, 0.06);
+          border-radius: 8px 0px 8px 8px;
+          color: #101828;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  .sendForm {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 16px 24px;
+    border-top: 1px solid #eaecf0;
+    .sendButton {
+      min-width: 50px;
+      height: 53px;
+      background: #007f80;
+      border: 1px solid #007f80;
+      box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .sendInput {
+      width: 100%;
+      input {
+        height: 42px;
+        padding-block: 0;
+      }
+      :global(.MuiOutlinedInput-notchedOutline) {
+        border: 1px solid #d0d5dd !important;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .veraBot {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    z-index: 999;
+  }
+
+  

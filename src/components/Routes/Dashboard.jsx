@@ -15,13 +15,19 @@ import TabularAISection from "../TabularAISection/TabularAISection";
 import TabularCSV from '../Tabulars/TabularCSV';
 import TabularView from '../Tabulars/TabularView';
 
-
-import AIAdvisorSection from "../AIAdvisorSection/AIAdvisorSection";
 import AIChatSection from "../AIChatSection/AIChatSection";
-import AISnapShotSection from "../AISnapShotSection/AISnapShotSection";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import IntroGui from "../Tabulars/Components/IntroGui";
+import ErrorPage from "../ErrorPages/ErrorPage";
+import ChatIntroGui from "../AIChatSection/Assets/ChatIntroGui";
+import Summarizer from "../SummarizeAi/Summarizer";
+import MeetingsInsights from "../MeetingsAi/MeetingsInsights";
+import TextToVideo from "../TextVideoAi/TextToVideo";
+import DataExtractor from "../DataExtractorAi/DataExtractor";
+
 const Dashboard = () => {
+
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const toggleSidebar = () => {
@@ -58,33 +64,41 @@ const Dashboard = () => {
                 />
 
                 <Route
-                  path="/AIAdvisorSection"
-                  element={<AIAdvisorSection />}
+                  path="/Summarizer"
+                  element={<Summarizer />}
                 />
 
+                <Route path="/AIChat" element={<ChatIntroGui />} />
                 <Route path="/AIChatSection" element={<AIChatSection />} />
 
                 <Route
-                  path="/AISnapShotSection"
-                  element={<AISnapShotSection />}
+                  path="/MeetingInsight"
+                  element={<MeetingsInsights />}
                 />
 
-
-<Route
-                  path="/TabularCSV"
-                  element={<TabularCSV />}
+                <Route
+                  path="/TextToVideo"
+                  element={<TextToVideo />}
                 />
 
-<Route
+                <Route
+                  path="/DataExtractor"
+                  element={<DataExtractor />}
+                />
+
+                <Route path="/TabularCSV" element={<TabularCSV />} />
+                <Route
+                  path="/TabularCsvIntro"
+                  element={<IntroGui />}
+                />
+                <Route
                   path="/TabularView"
                   element={<TabularView />}
                 />
-
-
-
                 <Route path="/Forms" element={<Forms />} />
-
                 <Route path="/Sheets" element={<Sheets />} />
+                <Route path="/ErrorPage" element={<ErrorPage />} />
+                <Route path="*" element={<ErrorPage />} />
               </Routes>
             </div>
           </div>
